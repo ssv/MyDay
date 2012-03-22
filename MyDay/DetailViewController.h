@@ -16,6 +16,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *uiDate;
 @property (strong, nonatomic) IBOutlet UILabel *uiTime;
 
+@property (strong, nonatomic) NSDate *taskPartDate;
+@property (strong, nonatomic) NSDate *taskPartTime;
+
 - (IBAction)cancel;
 - (IBAction)done;
 - (void)save;

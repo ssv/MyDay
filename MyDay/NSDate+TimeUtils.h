@@ -16,4 +16,7 @@
 - (NSDate *)onlyTime;
 - (NSDate *)onlyDate;
 
+- (NSDateComponents *)timeComponents;
+- (NSDateComponents *)dateComponents;
+
 @end

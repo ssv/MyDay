@@ -19,6 +19,8 @@
 @synthesize detailItem = _detailItem;
 @synthesize masterPopoverController = _masterPopoverController;
 
+@synthesize taskPartDate, taskPartTime;
+
 #pragma mark - Managing the detail item
 
 - (void)setDetailItem:(id)newDetailItem
@@ -43,8 +45,11 @@
         self.uiTitle.text = [[self.detailItem valueForKey:@"title"] description];
 
         NSDate *taskDate = [self.detailItem valueForKey:@"date"];
-        self.uiDate.text = [NSString stringWithFormat:@"Date: %@", [taskDate formatSimple]];
-        self.uiTime.text = [NSString stringWithFormat:@"Time: %@", [taskDate formatTime]];
+        self.taskPartDate = [taskDate onlyDate];
+        self.taskPartTime = [taskDate onlyTime];
+
+        self.uiDate.text = [NSString stringWithFormat:@"Date: %@", [self.taskPartDate formatSimple]];
+        self.uiTime.text = [NSString stringWithFormat:@"Time: %@", [self.taskPartTime formatTime]];
     }
 }
 
@@ -62,6 +67,9 @@
     self.uiTitle = nil;
     self.uiTime = nil;
     self.uiDate = nil;
+
+    self.taskPartDate = nil;
+    self.taskPartTime = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -84,7 +92,10 @@
 
 - (void)save {
     [self.detailItem setValue:self.uiTitle.text forKey:@"title"];
-    //[self.detailItem setValue:date forKey:@"date"]; // TODO build date
+
+    NSCalendar *gregorian = [NSCalendar currentCalendar];
+    NSDate *compiledDate = [gregorian dateByAddingComponents:[self.taskPartTime timeComponents] toDate:self.taskPartDate options:0];
+    [self.detailItem setValue:compiledDate forKey:@"date"];
 }
 
 #pragma mark - Split view

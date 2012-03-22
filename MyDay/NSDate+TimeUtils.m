@@ -11,30 +11,33 @@
 
 @implementation NSDate (TimeUtils)
 
-- (BOOL)isSameDayWithDate:(NSDate *)date {
-    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-
+- (NSDateComponents *)timeComponents {
+    unsigned unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit;
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *myComponents = [calendar components:unitFlags fromDate:self];
-    NSDateComponents *otherComponents = [calendar components:unitFlags fromDate:date];
+    return [calendar components:unitFlags fromDate:self];
+}
+
+- (NSDateComponents *)dateComponents {
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    return [calendar components:unitFlags fromDate:self];
+}
+
+- (BOOL)isSameDayWithDate:(NSDate *)date {
+    NSDateComponents *myComponents = [self dateComponents];
+    NSDateComponents *otherComponents = [date dateComponents];
 
     return [myComponents isEqual:otherComponents];
 }
 
 - (NSDate *)onlyTime {
-    unsigned unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit;
-
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *myComponents = [calendar components:unitFlags fromDate:self];
-    return [calendar dateFromComponents:myComponents];
+    return [calendar dateFromComponents:[self timeComponents]];
 }
 
 - (NSDate *)onlyDate {
-    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *myComponents = [calendar components:unitFlags fromDate:self];
-    return [calendar dateFromComponents:myComponents];
+    return [calendar dateFromComponents:[self dateComponents]];
 }
 
 - (NSString *)formatWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle {

@@ -79,7 +79,7 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     } else {
-        [self editAtIndexPath:[self.fetchedResultsController indexPathForObject:newManagedObject]];
+        [self performSegueWithIdentifier:@"showDetail" sender:self];
     }
 }
 
@@ -136,16 +136,12 @@
     return NO;
 }
 
-- (void)editAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         self.detailViewController.detailItem = object;
     }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self editAtIndexPath:indexPath];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

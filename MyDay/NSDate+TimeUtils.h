@@ -13,4 +13,7 @@
 - (NSString *)formatTime;
 - (NSString *)dateKind;
 
+- (NSDate *)onlyTime;
+- (NSDate *)onlyDate;
+
 @end

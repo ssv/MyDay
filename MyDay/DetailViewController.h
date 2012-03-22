@@ -12,6 +12,12 @@
 
 @property (strong, nonatomic) id detailItem;
 
-@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UITextField *uiTitle;
+@property (strong, nonatomic) IBOutlet UILabel *uiDate;
+@property (strong, nonatomic) IBOutlet UILabel *uiTime;
+
+- (IBAction)cancel;
+- (IBAction)done;
+- (void)save;
 
 @end

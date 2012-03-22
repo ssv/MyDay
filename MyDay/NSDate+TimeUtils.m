@@ -21,6 +21,22 @@
     return [myComponents isEqual:otherComponents];
 }
 
+- (NSDate *)onlyTime {
+    unsigned unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit;
+
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *myComponents = [calendar components:unitFlags fromDate:self];
+    return [calendar dateFromComponents:myComponents];
+}
+
+- (NSDate *)onlyDate {
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *myComponents = [calendar components:unitFlags fromDate:self];
+    return [calendar dateFromComponents:myComponents];
+}
+
 - (NSString *)formatWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setTimeStyle:timeStyle];

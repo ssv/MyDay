@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "NSDate+TimeUtils.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -16,7 +17,6 @@
 @implementation DetailViewController
 
 @synthesize detailItem = _detailItem;
-@synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
 
 #pragma mark - Managing the detail item
@@ -40,7 +40,11 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"date"] description];
+        self.uiTitle.text = [[self.detailItem valueForKey:@"title"] description];
+
+        NSDate *taskDate = [self.detailItem valueForKey:@"date"];
+        self.uiDate.text = [NSString stringWithFormat:@"Date: %@", [taskDate formatSimple]];
+        self.uiTime.text = [NSString stringWithFormat:@"Time: %@", [taskDate formatTime]];
     }
 }
 
@@ -55,7 +59,9 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    self.detailDescriptionLabel = nil;
+    self.uiTitle = nil;
+    self.uiTime = nil;
+    self.uiDate = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -65,6 +71,20 @@
     } else {
         return YES;
     }
+}
+
+- (IBAction)cancel {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)done {
+    [self save];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)save {
+    [self.detailItem setValue:self.uiTitle.text forKey:@"title"];
+    //[self.detailItem setValue:date forKey:@"date"]; // TODO build date
 }
 
 #pragma mark - Split view

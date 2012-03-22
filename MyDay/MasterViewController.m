@@ -67,7 +67,7 @@
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
     // TODO kill me :)
     int r = rand() % 10;
-    [newManagedObject setValue:[NSDate dateWithTimeIntervalSinceNow:(r*60*60*24)] forKey:@"date"];
+    [newManagedObject setValue:[NSDate dateWithTimeIntervalSinceNow:(r*60*60)] forKey:@"date"];
 
     [newManagedObject setValue:@"newTitle" forKey:@"title"];
     
@@ -89,6 +89,11 @@
 {
     return [[self.fetchedResultsController sections] count];
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [[[self.fetchedResultsController sections] objectAtIndex:section] name];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -169,14 +174,17 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                                managedObjectContext:self.managedObjectContext
+                                                                                                  sectionNameKeyPath:@"date.dateKind"
+                                                                                                           cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -257,8 +265,7 @@
     cell.textLabel.text = [[object valueForKey:@"title"] description];
     
     NSDate *taskDate = (NSDate *)[object valueForKey:@"date"];
-    NSString *dateString = [taskDate isSameDayWithDate:[NSDate date]] ? @"Today" : [taskDate formatSimple];
-    cell.detailTextLabel.text = dateString;
+    cell.detailTextLabel.text = taskDate.dateKind;
 }
 
 @end

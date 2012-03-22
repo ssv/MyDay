@@ -23,11 +23,17 @@
 
 - (NSString *)formatSimple {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 
     [dateFormatter setLocale:[NSLocale currentLocale]];
     return [dateFormatter stringFromDate:self];
+}
+
+- (NSString *)dateKind {
+    NSDate *now = [NSDate date];
+    if ([self compare:now] == NSOrderedAscending) return @"Overdue";
+    return [self isSameDayWithDate:now] ? @"Today" : [self formatSimple];
 }
 
 @end

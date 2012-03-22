@@ -10,5 +10,6 @@
 
 - (BOOL)isSameDayWithDate:(NSDate *)date;
 - (NSString *)formatSimple;
+- (NSString *)dateKind;
 
 @end

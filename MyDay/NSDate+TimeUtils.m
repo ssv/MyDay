@@ -21,13 +21,21 @@
     return [myComponents isEqual:otherComponents];
 }
 
-- (NSString *)formatSimple {
+- (NSString *)formatWithDateStyle:(NSDateFormatterStyle)dateStyle timeStyle:(NSDateFormatterStyle)timeStyle {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:timeStyle];
+    [dateFormatter setDateStyle:dateStyle];
 
     [dateFormatter setLocale:[NSLocale currentLocale]];
     return [dateFormatter stringFromDate:self];
+}
+
+- (NSString *)formatSimple {
+    return [self formatWithDateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+}
+
+- (NSString *)formatTime {
+    return [self formatWithDateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
 }
 
 - (NSString *)dateKind {

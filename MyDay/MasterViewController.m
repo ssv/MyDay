@@ -265,7 +265,7 @@
     cell.textLabel.text = [[object valueForKey:@"title"] description];
     
     NSDate *taskDate = (NSDate *)[object valueForKey:@"date"];
-    cell.detailTextLabel.text = taskDate.dateKind;
+    cell.detailTextLabel.text = [taskDate formatTime];
 }
 
 @end

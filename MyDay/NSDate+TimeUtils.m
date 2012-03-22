@@ -21,4 +21,13 @@
     return [myComponents isEqual:otherComponents];
 }
 
+- (NSString *)formatSimple {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    return [dateFormatter stringFromDate:self];
+}
+
 @end

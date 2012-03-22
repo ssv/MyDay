@@ -65,7 +65,10 @@
     
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate dateWithTimeIntervalSinceNow:(60*60*24)] forKey:@"date"];
+    // TODO kill me :)
+    int r = rand() % 10;
+    [newManagedObject setValue:[NSDate dateWithTimeIntervalSinceNow:(r*60*60*24)] forKey:@"date"];
+
     [newManagedObject setValue:@"newTitle" forKey:@"title"];
     
     // Save the context.
@@ -254,9 +257,8 @@
     cell.textLabel.text = [[object valueForKey:@"title"] description];
     
     NSDate *taskDate = (NSDate *)[object valueForKey:@"date"];
-    NSString *dateString = [taskDate isSameDayWithDate:[NSDate date]] ? @"Today" : taskDate.description;
+    NSString *dateString = [taskDate isSameDayWithDate:[NSDate date]] ? @"Today" : [taskDate formatSimple];
     cell.detailTextLabel.text = dateString;
-    
 }
 
 @end

@@ -9,5 +9,6 @@
 @interface NSDate (TimeUtils)
 
 - (BOOL)isSameDayWithDate:(NSDate *)date;
+- (NSString *)formatSimple;
 
 @end

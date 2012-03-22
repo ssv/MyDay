@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0437A79A151B411800E8DDB2 /* NSDate+TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437A799151B411800E8DDB2 /* NSDate+TimeUtils.m */; };
 		045BBB23151B13620052BB0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB22151B13620052BB0B /* UIKit.framework */; };
 		045BBB25151B13620052BB0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB24151B13620052BB0B /* Foundation.framework */; };
 		045BBB27151B13620052BB0B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB26151B13620052BB0B /* CoreGraphics.framework */; };
@@ -22,23 +23,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0437A798151B411800E8DDB2 /* NSDate+TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeUtils.h"; sourceTree = "<group>"; };
+		0437A799151B411800E8DDB2 /* NSDate+TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeUtils.m"; sourceTree = "<group>"; };
 		045BBB1E151B13620052BB0B /* MyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045BBB22151B13620052BB0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		045BBB24151B13620052BB0B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		045BBB26151B13620052BB0B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		045BBB28151B13620052BB0B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		045BBB2C151B13620052BB0B /* MyDay-Info.plist */ = {isa = PBXFileReference; path = "MyDay-Info.plist"; sourceTree = "<group>"; };
+		045BBB2C151B13620052BB0B /* MyDay-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyDay-Info.plist"; sourceTree = "<group>"; };
 		045BBB2E151B13620052BB0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		045BBB30151B13620052BB0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		045BBB32151B13620052BB0B /* MyDay-Prefix.pch */ = {isa = PBXFileReference; path = "MyDay-Prefix.pch"; sourceTree = "<group>"; };
-		045BBB33151B13620052BB0B /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		045BBB32151B13620052BB0B /* MyDay-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyDay-Prefix.pch"; sourceTree = "<group>"; };
+		045BBB33151B13620052BB0B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		045BBB34151B13620052BB0B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		045BBB37151B13620052BB0B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		045BBB3A151B13620052BB0B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		045BBB3D151B13620052BB0B /* MyDay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyDay.xcdatamodel; sourceTree = "<group>"; };
-		045BBB3F151B13620052BB0B /* MasterViewController.h */ = {isa = PBXFileReference; path = MasterViewController.h; sourceTree = "<group>"; };
+		045BBB3F151B13620052BB0B /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		045BBB40151B13620052BB0B /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		045BBB42151B13620052BB0B /* DetailViewController.h */ = {isa = PBXFileReference; path = DetailViewController.h; sourceTree = "<group>"; };
+		045BBB42151B13620052BB0B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		045BBB43151B13620052BB0B /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0437A795151B403B00E8DDB2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0437A798151B411800E8DDB2 /* NSDate+TimeUtils.h */,
+				0437A799151B411800E8DDB2 /* NSDate+TimeUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		045BBB13151B135D0052BB0B = {
 			isa = PBXGroup;
 			children = (
@@ -88,15 +100,11 @@
 		045BBB2A151B13620052BB0B /* MyDay */ = {
 			isa = PBXGroup;
 			children = (
-				045BBB33151B13620052BB0B /* AppDelegate.h */,
-				045BBB34151B13620052BB0B /* AppDelegate.m */,
-				045BBB36151B13620052BB0B /* MainStoryboard_iPhone.storyboard */,
-				045BBB39151B13620052BB0B /* MainStoryboard_iPad.storyboard */,
-				045BBB3F151B13620052BB0B /* MasterViewController.h */,
-				045BBB40151B13620052BB0B /* MasterViewController.m */,
-				045BBB42151B13620052BB0B /* DetailViewController.h */,
-				045BBB43151B13620052BB0B /* DetailViewController.m */,
-				045BBB3C151B13620052BB0B /* MyDay.xcdatamodeld */,
+				045FA37C151B1C5000409355 /* Application */,
+				045FA37F151B1C6B00409355 /* Models */,
+				045FA37D151B1C5900409355 /* Views */,
+				045FA37E151B1C6200409355 /* Controllers */,
+				0437A795151B403B00E8DDB2 /* Utils */,
 				045BBB2B151B13620052BB0B /* Supporting Files */,
 			);
 			path = MyDay;
@@ -111,6 +119,43 @@
 				045BBB32151B13620052BB0B /* MyDay-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		045FA37C151B1C5000409355 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				045BBB33151B13620052BB0B /* AppDelegate.h */,
+				045BBB34151B13620052BB0B /* AppDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		045FA37D151B1C5900409355 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				045BBB36151B13620052BB0B /* MainStoryboard_iPhone.storyboard */,
+				045BBB39151B13620052BB0B /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		045FA37E151B1C6200409355 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				045BBB3F151B13620052BB0B /* MasterViewController.h */,
+				045BBB40151B13620052BB0B /* MasterViewController.m */,
+				045BBB42151B13620052BB0B /* DetailViewController.h */,
+				045BBB43151B13620052BB0B /* DetailViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		045FA37F151B1C6B00409355 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				045BBB3C151B13620052BB0B /* MyDay.xcdatamodeld */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +226,7 @@
 				045BBB3E151B13620052BB0B /* MyDay.xcdatamodeld in Sources */,
 				045BBB41151B13620052BB0B /* MasterViewController.m in Sources */,
 				045BBB44151B13620052BB0B /* DetailViewController.m in Sources */,
+				0437A79A151B411800E8DDB2 /* NSDate+TimeUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +348,7 @@
 				045BBB49151B13620052BB0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

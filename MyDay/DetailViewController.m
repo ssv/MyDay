@@ -39,6 +39,8 @@
     }        
 }
 
+#pragma mark - Messing with views
+
 - (void)updateView {
     [self.uiDate setTitle:[self.taskPartDate formatShort] forState:UIControlStateNormal];
     [self.uiTime setTitle:[self.taskPartTime formatTime] forState:UIControlStateNormal];
@@ -112,6 +114,8 @@
     }
 }
 
+#pragma mark - Editing content
+
 - (IBAction)cancel {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -132,9 +136,12 @@
     [appDelegate saveContext];
 }
 
+#pragma mark - Date and time picker
+
 - (void)stylePickerForTime {
     UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
     picker.datePickerMode = UIDatePickerModeTime;
+    picker.minuteInterval = 10;
 }
 
 - (void)stylePickerForDate {

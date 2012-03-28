@@ -65,11 +65,9 @@
     
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    // TODO kill me :)
-    int r = rand() % 10;
-    [newManagedObject setValue:[NSDate dateWithTimeIntervalSinceNow:(r*60*60*10)] forKey:@"date"];
+    [newManagedObject setValue:[[NSDate date] onlyDate] forKey:@"date"];
 
-    [newManagedObject setValue:@"newTitle" forKey:@"title"];
+    [newManagedObject setValue:@"" forKey:@"title"];
     
     // Save the context.
     NSError *error = nil;
@@ -79,6 +77,8 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     } else {
+        NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:newManagedObject];
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         [self performSegueWithIdentifier:@"showDetail" sender:self];
     }
 }

@@ -16,6 +16,10 @@
 @end
 
 @implementation DetailViewController
+@synthesize uiDate;
+@synthesize uiTime;
+@synthesize datePickerView;
+@synthesize uiTitle;
 @synthesize uiDateSwitch;
 
 @synthesize detailItem = _detailItem;
@@ -84,7 +88,7 @@
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     [toolbar setBarStyle:UIBarStyleBlackOpaque];
-    [toolbar setItems:@[buttonCancel, spring, buttonDone]];
+    [toolbar setItems:[NSArray arrayWithObjects:buttonCancel, spring, buttonDone, nil]];
     [self.datePickerView addSubview:toolbar];
     
     UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 50, 320, 320)];

@@ -30,6 +30,16 @@
     return [myComponents isEqual:otherComponents];
 }
 
+- (BOOL)isTomorrowForDate:(NSDate *)date {
+    NSCalendar *gregorian = [NSCalendar currentCalendar];
+
+    NSDateComponents *aDay = [NSDateComponents new];
+    aDay.day = 1;
+    
+    NSDate *tomorrow = [gregorian dateByAddingComponents:aDay toDate:self options:0];
+    return [date isSameDayWithDate:tomorrow];
+}
+
 - (NSDate *)onlyTime {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     return [calendar dateFromComponents:[self timeComponents]];
@@ -49,7 +59,11 @@
     return [dateFormatter stringFromDate:self];
 }
 
-- (NSString *)formatSimple {
+- (NSString *)formatShort {
+    return [self formatWithDateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
+}
+
+- (NSString *)formatMiddle {
     return [self formatWithDateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
 }
 
@@ -60,7 +74,7 @@
 - (NSString *)dateKind {
     NSDate *now = [NSDate date];
     if ([self compare:now] == NSOrderedAscending) return @"Overdue";
-    return [self isSameDayWithDate:now] ? @"Today" : [self formatSimple];
+    return [self isSameDayWithDate:now] ? @"Today" : [self formatMiddle];
 }
 
 @end

@@ -86,61 +86,111 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" hint="Title"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="21" id="Zca-LS-hfc"/>
+                                </connections>
                             </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="C5K-gS-t3x">
-                                <rect key="frame" x="20" y="103" width="280" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Today"/>
-                                    <segment title="Tomorrow"/>
-                                    <segment title="..."/>
-                                </segments>
-                            </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JaT-DK-ohI">
-                                <rect key="frame" x="219" y="162" width="81" height="37"/>
+                            <view contentMode="scaleToFill" id="bNX-W3-VpO">
+                                <rect key="frame" x="20" y="71" width="280" height="155"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="edit">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date: 15.05.2009" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="tlI-kT-SUG">
-                                <rect key="frame" x="20" y="74" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time: 15:45" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="u6d-zQ-zE8">
-                                <rect key="frame" x="20" y="170" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="40M-t9-wy9">
+                                        <rect key="frame" x="20" y="0.0" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="C5K-gS-t3x">
+                                        <rect key="frame" x="20" y="92" width="240" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="Today"/>
+                                            <segment title="Tomorrow"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="changeDateViaButton:" destination="21" eventType="valueChanged" id="SFJ-Nb-2Xa"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vfA-Ws-nKJ">
+                                        <rect key="frame" x="20" y="29" width="134" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="15.05.2012">
+                                            <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeDate" destination="21" eventType="touchUpInside" id="uH6-Vu-obz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="44T-IO-OEU">
+                                        <rect key="frame" x="159" y="29" width="101" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="15:55">
+                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeTime" destination="21" eventType="touchUpInside" id="uOM-Hg-miF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="idM-Bv-y7A">
+                                <rect key="frame" x="20" y="247" width="282" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="iv5-mJ-Fae">
+                                        <rect key="frame" x="20" y="32" width="242" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="No"/>
+                                            <segment title="5 min"/>
+                                            <segment title="1 hour"/>
+                                            <segment title="1 day"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Alert:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="rl0-BS-oQg">
+                                        <rect key="frame" x="20" y="0.0" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="26">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="9wA-qq-cGj">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="9wA-qq-cGj">
                             <connections>
                                 <action selector="cancel" destination="21" id="xFq-HI-aJq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="utX-67-SDz">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="utX-67-SDz">
                             <connections>
                                 <action selector="done" destination="21" id="3I7-NC-bhP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="uiDate" destination="tlI-kT-SUG" id="Fcj-7l-bfD"/>
-                        <outlet property="uiTime" destination="u6d-zQ-zE8" id="QRi-r9-jgG"/>
+                        <outlet property="uiDate" destination="vfA-Ws-nKJ" id="hSB-Sv-QN2"/>
+                        <outlet property="uiDateSwitch" destination="C5K-gS-t3x" id="14P-1K-Jjv"/>
+                        <outlet property="uiTime" destination="44T-IO-OEU" id="XEh-05-R78"/>
                         <outlet property="uiTitle" destination="WZH-ZX-TH9" id="8VC-2g-wvh"/>
                     </connections>
                 </viewController>
@@ -153,9 +203,13 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancel"/>
+                <relationship kind="action" name="changeDate"/>
+                <relationship kind="action" name="changeDate:"/>
+                <relationship kind="action" name="changeTime"/>
                 <relationship kind="action" name="done"/>
-                <relationship kind="outlet" name="uiDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="uiTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="uiDate" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="uiDateSwitch" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="uiTime" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="uiTitle" candidateClass="UITextField"/>
             </relationships>
         </class>

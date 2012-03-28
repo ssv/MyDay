@@ -67,7 +67,7 @@
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
     // TODO kill me :)
     int r = rand() % 10;
-    [newManagedObject setValue:[NSDate dateWithTimeIntervalSinceNow:(r*60*60)] forKey:@"date"];
+    [newManagedObject setValue:[NSDate dateWithTimeIntervalSinceNow:(r*60*60*10)] forKey:@"date"];
 
     [newManagedObject setValue:@"newTitle" forKey:@"title"];
     

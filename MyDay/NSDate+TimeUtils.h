@@ -9,8 +9,12 @@
 @interface NSDate (TimeUtils)
 
 - (BOOL)isSameDayWithDate:(NSDate *)date;
-- (NSString *)formatSimple;
+- (BOOL)isTomorrowForDate:(NSDate *)date;
+
+- (NSString *)formatShort;
+- (NSString *)formatMiddle;
 - (NSString *)formatTime;
+
 - (NSString *)dateKind;
 
 - (NSDate *)onlyTime;

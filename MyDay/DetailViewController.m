@@ -15,6 +15,7 @@
 @end
 
 @implementation DetailViewController
+@synthesize uiDateSwitch;
 
 @synthesize detailItem = _detailItem;
 @synthesize masterPopoverController = _masterPopoverController;
@@ -48,8 +49,14 @@
         self.taskPartDate = [taskDate onlyDate];
         self.taskPartTime = [taskDate onlyTime];
 
-        self.uiDate.text = [NSString stringWithFormat:@"Date: %@", [self.taskPartDate formatSimple]];
-        self.uiTime.text = [NSString stringWithFormat:@"Time: %@", [self.taskPartTime formatTime]];
+        self.uiDate.titleLabel.text = [self.taskPartDate formatShort];
+        self.uiTime.titleLabel.text = [self.taskPartTime formatTime];
+        
+        if ([self.taskPartDate isSameDayWithDate:[NSDate date]]) {
+            [uiDateSwitch setSelectedSegmentIndex:0];
+        } else if ([self.taskPartDate isTomorrowForDate:[NSDate date]]) {
+            [uiDateSwitch setSelectedSegmentIndex:1];
+        }
     }
 }
 
@@ -62,6 +69,7 @@
 
 - (void)viewDidUnload
 {
+    [self setUiDateSwitch:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.uiTitle = nil;
@@ -98,6 +106,29 @@
     [self.detailItem setValue:compiledDate forKey:@"date"];
 }
 
+- (IBAction)changeDate {
+    NSLog(@"changedate!");
+}
+
+- (IBAction)changeTime {
+    NSLog(@"changetime!");
+}
+
+- (IBAction)changeDateViaButton:(id)sender {
+    if ([(UISegmentedControl *)sender selectedSegmentIndex] == 0) {
+        // today
+        self.taskPartDate = [[NSDate date] onlyDate];
+        self.uiDate.titleLabel.text = [self.taskPartDate formatShort];
+    } else {
+        // tomorrow
+        NSCalendar *gregorian = [NSCalendar currentCalendar];
+        NSDateComponents *aDay = [NSDateComponents new];
+        aDay.day = 1;
+        self.taskPartDate = [[gregorian dateByAddingComponents:aDay toDate:[NSDate date] options:0] onlyDate];
+        self.uiDate.titleLabel.text = [self.taskPartDate formatShort];
+    }
+}
+
 #pragma mark - Split view
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
@@ -112,6 +143,13 @@
     // Called when the view is shown again in the split view, invalidating the button and popover controller.
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

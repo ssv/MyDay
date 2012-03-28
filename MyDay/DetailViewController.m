@@ -49,6 +49,8 @@
         [uiDateSwitch setSelectedSegmentIndex:0];
     } else if ([self.taskPartDate isNextDayAfterDate:[NSDate date]]) {
         [uiDateSwitch setSelectedSegmentIndex:1];
+    } else {
+        [uiDateSwitch setSelectedSegmentIndex:-1];
     }
 }
 
@@ -108,6 +110,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [self updateView];
+    
     if ([[self.detailItem valueForKey:@"title"] isEqualToString:@""]) {
         [self.uiTitle becomeFirstResponder];
     }

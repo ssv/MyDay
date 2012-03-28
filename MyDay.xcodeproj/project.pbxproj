@@ -345,7 +345,7 @@
 				045BBB46151B13620052BB0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		045BBB47151B13620052BB0B /* Build configuration list for PBXNativeTarget "MyDay" */ = {
 			isa = XCConfigurationList;
@@ -354,7 +354,7 @@
 				045BBB49151B13620052BB0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

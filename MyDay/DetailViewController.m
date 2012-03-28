@@ -105,6 +105,12 @@
     self.taskPartTime = nil;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    if ([[self.detailItem valueForKey:@"title"] isEqualToString:@""]) {
+        [self.uiTitle becomeFirstResponder];
+    }
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

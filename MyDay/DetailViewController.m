@@ -69,19 +69,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-    self.datePickerView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, 320, 360)];
+    self.datePickerView = [[UIView alloc] initWithFrame:CGRectMake(0, 168, 320, 300)];
     
     UIBarButtonItem *buttonCancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDateEdit)];
     UIBarButtonItem *spring = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *buttonDone = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneDateEdit)];
     
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 32)];
     [toolbar setBarStyle:UIBarStyleBlackOpaque];
     [toolbar setItems:@[buttonCancel, spring, buttonDone]];
     [self.datePickerView addSubview:toolbar];
     
-    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 50, 320, 300)];
-    datePicker.datePickerMode = UIDatePickerModeDate;
+    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 32, 320, 320)];
     [self.datePickerView addSubview:datePicker];
 
     [self configureView];
@@ -129,10 +128,14 @@
     [self.detailItem setValue:compiledDate forKey:@"date"];
 }
 
-- (IBAction)changeDate {
+- (void)stylePickerForTime {
     UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
-    picker.date = self.taskPartDate;
-    [self.view addSubview:self.datePickerView];
+    picker.datePickerMode = UIDatePickerModeTime;
+}
+
+- (void)stylePickerForDate {
+    UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
+    picker.datePickerMode = UIDatePickerModeDate;
 }
 
 - (void)cancelDateEdit {
@@ -142,14 +145,28 @@
 - (void)doneDateEdit {
     UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
     
-    self.taskPartDate = [picker.date onlyDate];
+    if (picker.datePickerMode == UIDatePickerModeDate) {
+        self.taskPartDate = [picker.date onlyDate];
+    } else {
+        self.taskPartTime = [picker.date onlyTime];
+    }
     [self updateView];
     
     [self.datePickerView removeFromSuperview];
 }
 
+- (IBAction)changeDate {
+    [self stylePickerForDate];
+    UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
+    picker.date = self.taskPartDate;
+    [self.view addSubview:self.datePickerView];
+}
+
 - (IBAction)changeTime {
-    NSLog(@"changetime!");
+    [self stylePickerForTime];
+    UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
+    picker.date = self.taskPartTime;
+    [self.view addSubview:self.datePickerView];
 }
 
 - (IBAction)changeDateViaButton:(id)sender {

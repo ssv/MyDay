@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "NSDate+TimeUtils.h"
+#import "AppDelegate.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -126,6 +127,9 @@
     NSCalendar *gregorian = [NSCalendar currentCalendar];
     NSDate *compiledDate = [gregorian dateByAddingComponents:[self.taskPartTime timeComponents] toDate:self.taskPartDate options:0];
     [self.detailItem setValue:compiledDate forKey:@"date"];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate saveContext];
 }
 
 - (void)stylePickerForTime {

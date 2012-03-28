@@ -30,14 +30,14 @@
     return [myComponents isEqual:otherComponents];
 }
 
-- (BOOL)isTomorrowForDate:(NSDate *)date {
+- (BOOL)isNextDayAfterDate:(NSDate *)date {
     NSCalendar *gregorian = [NSCalendar currentCalendar];
 
     NSDateComponents *aDay = [NSDateComponents new];
     aDay.day = 1;
     
-    NSDate *tomorrow = [gregorian dateByAddingComponents:aDay toDate:self options:0];
-    return [date isSameDayWithDate:tomorrow];
+    NSDate *tomorrow = [gregorian dateByAddingComponents:aDay toDate:date options:0];
+    return [self isSameDayWithDate:tomorrow];
 }
 
 - (NSDate *)onlyTime {

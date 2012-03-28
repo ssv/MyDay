@@ -49,12 +49,12 @@
         self.taskPartDate = [taskDate onlyDate];
         self.taskPartTime = [taskDate onlyTime];
 
-        self.uiDate.titleLabel.text = [self.taskPartDate formatShort];
-        self.uiTime.titleLabel.text = [self.taskPartTime formatTime];
+        [self.uiDate setTitle:[self.taskPartDate formatShort] forState:UIControlStateNormal];
+        [self.uiTime setTitle:[self.taskPartTime formatTime] forState:UIControlStateNormal];
         
         if ([self.taskPartDate isSameDayWithDate:[NSDate date]]) {
             [uiDateSwitch setSelectedSegmentIndex:0];
-        } else if ([self.taskPartDate isTomorrowForDate:[NSDate date]]) {
+        } else if ([self.taskPartDate isNextDayAfterDate:[NSDate date]]) {
             [uiDateSwitch setSelectedSegmentIndex:1];
         }
     }
@@ -118,14 +118,14 @@
     if ([(UISegmentedControl *)sender selectedSegmentIndex] == 0) {
         // today
         self.taskPartDate = [[NSDate date] onlyDate];
-        self.uiDate.titleLabel.text = [self.taskPartDate formatShort];
+        [self.uiDate setTitle:[self.taskPartDate formatShort] forState:UIControlStateNormal];
     } else {
         // tomorrow
         NSCalendar *gregorian = [NSCalendar currentCalendar];
         NSDateComponents *aDay = [NSDateComponents new];
         aDay.day = 1;
         self.taskPartDate = [[gregorian dateByAddingComponents:aDay toDate:[NSDate date] options:0] onlyDate];
-        self.uiDate.titleLabel.text = [self.taskPartDate formatShort];
+        [self.uiDate setTitle:[self.taskPartDate formatShort] forState:UIControlStateNormal];
     }
 }
 

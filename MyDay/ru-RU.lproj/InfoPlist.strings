@@ -1,0 +1,5 @@
+/* Localized versions of Info.plist keys */
+"Overdue" = "Просроченные";
+"Today" = "Сегодня";
+"Cancel" = "Отмена";
+"Done" = "ОК";

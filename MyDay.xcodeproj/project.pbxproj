@@ -43,6 +43,9 @@
 		045BBB40151B13620052BB0B /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		045BBB42151B13620052BB0B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		045BBB43151B13620052BB0B /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		04D601001523651B0021B416 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "ru-RU"; path = "/Users/ssv/Projects/MyDay/MyDay/ru-RU.lproj/MainStoryboard_iPhone.storyboard"; sourceTree = "<absolute>"; };
+		04D601011523651B0021B416 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "ru-RU"; path = "/Users/ssv/Projects/MyDay/MyDay/ru-RU.lproj/MainStoryboard_iPad.storyboard"; sourceTree = "<absolute>"; };
+		04D601021523651B0021B416 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "/Users/ssv/Projects/MyDay/MyDay/ru-RU.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +240,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				045BBB2E151B13620052BB0B /* en */,
+				04D601021523651B0021B416 /* ru-RU */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -245,6 +249,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				045BBB37151B13620052BB0B /* en */,
+				04D601001523651B0021B416 /* ru-RU */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				045BBB3A151B13620052BB0B /* en */,
+				04D601011523651B0021B416 /* ru-RU */,
 			);
 			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";

@@ -73,8 +73,8 @@
 
 - (NSString *)dateKind {
     NSDate *now = [NSDate date];
-    if ([self compare:now] == NSOrderedAscending) return @"Overdue";
-    return [self isSameDayWithDate:now] ? @"Today" : [self formatMiddle];
+    if ([self compare:now] == NSOrderedAscending) return NSLocalizedString(@"Overdue", @"For tasks that are overdue");
+    return [self isSameDayWithDate:now] ? NSLocalizedString(@"Today", @"Tasks for today") : [self formatMiddle];
 }
 
 @end

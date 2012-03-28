@@ -38,10 +38,21 @@
     }        
 }
 
+- (void)updateView {
+    [self.uiDate setTitle:[self.taskPartDate formatShort] forState:UIControlStateNormal];
+    [self.uiTime setTitle:[self.taskPartTime formatTime] forState:UIControlStateNormal];
+    
+    if ([self.taskPartDate isSameDayWithDate:[NSDate date]]) {
+        [uiDateSwitch setSelectedSegmentIndex:0];
+    } else if ([self.taskPartDate isNextDayAfterDate:[NSDate date]]) {
+        [uiDateSwitch setSelectedSegmentIndex:1];
+    }
+}
+
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
+    
     if (self.detailItem) {
         self.uiTitle.text = [[self.detailItem valueForKey:@"title"] description];
 
@@ -49,14 +60,7 @@
         self.taskPartDate = [taskDate onlyDate];
         self.taskPartTime = [taskDate onlyTime];
 
-        [self.uiDate setTitle:[self.taskPartDate formatShort] forState:UIControlStateNormal];
-        [self.uiTime setTitle:[self.taskPartTime formatTime] forState:UIControlStateNormal];
-        
-        if ([self.taskPartDate isSameDayWithDate:[NSDate date]]) {
-            [uiDateSwitch setSelectedSegmentIndex:0];
-        } else if ([self.taskPartDate isNextDayAfterDate:[NSDate date]]) {
-            [uiDateSwitch setSelectedSegmentIndex:1];
-        }
+        [self updateView];
     }
 }
 
@@ -64,6 +68,22 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    self.datePickerView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, 320, 360)];
+    
+    UIBarButtonItem *buttonCancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDateEdit)];
+    UIBarButtonItem *spring = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *buttonDone = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneDateEdit)];
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+    [toolbar setBarStyle:UIBarStyleBlackOpaque];
+    [toolbar setItems:@[buttonCancel, spring, buttonDone]];
+    [self.datePickerView addSubview:toolbar];
+    
+    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 50, 320, 300)];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.datePickerView addSubview:datePicker];
+
     [self configureView];
 }
 
@@ -71,7 +91,10 @@
 {
     [self setUiDateSwitch:nil];
     [super viewDidUnload];
+
     // Release any retained subviews of the main view.
+    self.datePickerView = nil;
+    
     self.uiTitle = nil;
     self.uiTime = nil;
     self.uiDate = nil;
@@ -107,7 +130,22 @@
 }
 
 - (IBAction)changeDate {
-    NSLog(@"changedate!");
+    UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
+    picker.date = self.taskPartDate;
+    [self.view addSubview:self.datePickerView];
+}
+
+- (void)cancelDateEdit {
+    [self.datePickerView removeFromSuperview];
+}
+
+- (void)doneDateEdit {
+    UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
+    
+    self.taskPartDate = [picker.date onlyDate];
+    [self updateView];
+    
+    [self.datePickerView removeFromSuperview];
 }
 
 - (IBAction)changeTime {
@@ -118,14 +156,14 @@
     if ([(UISegmentedControl *)sender selectedSegmentIndex] == 0) {
         // today
         self.taskPartDate = [[NSDate date] onlyDate];
-        [self.uiDate setTitle:[self.taskPartDate formatShort] forState:UIControlStateNormal];
+        [self updateView];
     } else {
         // tomorrow
         NSCalendar *gregorian = [NSCalendar currentCalendar];
         NSDateComponents *aDay = [NSDateComponents new];
         aDay.day = 1;
         self.taskPartDate = [[gregorian dateByAddingComponents:aDay toDate:[NSDate date] options:0] onlyDate];
-        [self.uiDate setTitle:[self.taskPartDate formatShort] forState:UIControlStateNormal];
+        [self updateView];
     }
 }
 

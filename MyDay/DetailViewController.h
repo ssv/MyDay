@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) id detailItem;
 
+@property (strong, nonatomic) UIView *datePickerView;
+
 @property (strong, nonatomic) IBOutlet UITextField *uiTitle;
 @property (strong, nonatomic) IBOutlet UIButton *uiDate;
 @property (strong, nonatomic) IBOutlet UIButton *uiTime;
@@ -27,5 +29,8 @@
 - (IBAction)changeDate;
 - (IBAction)changeTime;
 - (IBAction)changeDateViaButton:(id)sender;
+
+- (void)cancelDateEdit;
+- (void)doneDateEdit;
 
 @end

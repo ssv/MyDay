@@ -57,6 +57,8 @@
     }
 }
 
+#pragma mark - Handling objects
+
 - (void)insertNewObject:(id)sender
 {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -65,7 +67,16 @@
     
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[[NSDate date] onlyDate] forKey:@"date"];
+
+    NSCalendar *gregorian = [NSCalendar currentCalendar];
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit;
+    NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date]];
+    NSDate *creationDateNoMins = [gregorian dateFromComponents:components];
+    
+    NSDateComponents *anHour = [NSDateComponents new];
+    anHour.hour = 1;
+    NSDate *preferredDate = [gregorian dateByAddingComponents:anHour toDate:creationDateNoMins options:0];
+    [newManagedObject setValue:preferredDate forKey:@"date"];
 
     [newManagedObject setValue:@"" forKey:@"title"];
     

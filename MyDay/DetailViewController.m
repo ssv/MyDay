@@ -183,6 +183,9 @@
 }
 
 - (IBAction)changeDate {
+    if ([uiTitle isFirstResponder])
+        [uiTitle resignFirstResponder];
+    
     [self stylePickerForDate];
     UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
     picker.date = self.taskPartDate;
@@ -190,6 +193,9 @@
 }
 
 - (IBAction)changeTime {
+    if ([uiTitle isFirstResponder])
+        [uiTitle resignFirstResponder];
+
     [self stylePickerForTime];
     UIDatePicker *picker = (UIDatePicker *)[[self.datePickerView subviews] objectAtIndex:1];
     picker.date = self.taskPartTime;
@@ -197,6 +203,9 @@
 }
 
 - (IBAction)changeDateViaButton:(id)sender {
+    if ([uiTitle isFirstResponder])
+        [uiTitle resignFirstResponder];
+
     if ([(UISegmentedControl *)sender selectedSegmentIndex] == 0) {
         // today
         self.taskPartDate = [[NSDate date] onlyDate];
@@ -230,6 +239,13 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.datePickerView.superview) {
+        [self.datePickerView removeFromSuperview];
+    }
     return YES;
 }
 

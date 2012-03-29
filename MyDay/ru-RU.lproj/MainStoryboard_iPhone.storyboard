@@ -92,18 +92,11 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" id="bNX-W3-VpO">
-                                <rect key="frame" x="20" y="71" width="280" height="155"/>
+                                <rect key="frame" x="20" y="71" width="280" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Дата:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="40M-t9-wy9">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="C5K-gS-t3x">
-                                        <rect key="frame" x="20" y="92" width="240" height="44"/>
+                                        <rect key="frame" x="20" y="62" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <segments>
                                             <segment title="Сегодня"/>
@@ -114,7 +107,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vfA-Ws-nKJ">
-                                        <rect key="frame" x="0.0" y="29" width="154" height="43"/>
+                                        <rect key="frame" x="0.0" y="-1" width="154" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
@@ -130,7 +123,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="44T-IO-OEU">
-                                        <rect key="frame" x="159" y="29" width="121" height="43"/>
+                                        <rect key="frame" x="159" y="-1" width="121" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>

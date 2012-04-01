@@ -7,22 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042741D9152837A900AA81E0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042741DA152837A900AA81E0 /* DetailViewController.m */; };
+		042741DF15283BCC00AA81E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042741E115283BCC00AA81E0 /* Localizable.strings */; };
 		0437A79A151B411800E8DDB2 /* NSDate+TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437A799151B411800E8DDB2 /* NSDate+TimeUtils.m */; };
 		045BBB23151B13620052BB0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB22151B13620052BB0B /* UIKit.framework */; };
 		045BBB25151B13620052BB0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB24151B13620052BB0B /* Foundation.framework */; };
 		045BBB27151B13620052BB0B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB26151B13620052BB0B /* CoreGraphics.framework */; };
 		045BBB29151B13620052BB0B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB28151B13620052BB0B /* CoreData.framework */; };
-		045BBB2F151B13620052BB0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 045BBB2D151B13620052BB0B /* InfoPlist.strings */; };
 		045BBB31151B13620052BB0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BBB30151B13620052BB0B /* main.m */; };
 		045BBB35151B13620052BB0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BBB34151B13620052BB0B /* AppDelegate.m */; };
 		045BBB38151B13620052BB0B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045BBB36151B13620052BB0B /* MainStoryboard_iPhone.storyboard */; };
 		045BBB3B151B13620052BB0B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045BBB39151B13620052BB0B /* MainStoryboard_iPad.storyboard */; };
 		045BBB3E151B13620052BB0B /* MyDay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 045BBB3C151B13620052BB0B /* MyDay.xcdatamodeld */; };
 		045BBB41151B13620052BB0B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BBB40151B13620052BB0B /* MasterViewController.m */; };
-		045BBB44151B13620052BB0B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BBB43151B13620052BB0B /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042741DA152837A900AA81E0 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		042741DB152837D400AA81E0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = /Users/ssv/Projects/MyDay/MyDay/ru.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<absolute>"; };
+		042741DC152837D400AA81E0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = /Users/ssv/Projects/MyDay/MyDay/ru.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<absolute>"; };
+		042741E015283BCC00AA81E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		042741E215283BD300AA81E0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0437A798151B411800E8DDB2 /* NSDate+TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeUtils.h"; sourceTree = "<group>"; };
 		0437A799151B411800E8DDB2 /* NSDate+TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeUtils.m"; sourceTree = "<group>"; };
 		045BBB1E151B13620052BB0B /* MyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,7 +36,6 @@
 		045BBB26151B13620052BB0B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		045BBB28151B13620052BB0B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		045BBB2C151B13620052BB0B /* MyDay-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyDay-Info.plist"; sourceTree = "<group>"; };
-		045BBB2E151B13620052BB0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		045BBB30151B13620052BB0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		045BBB32151B13620052BB0B /* MyDay-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyDay-Prefix.pch"; sourceTree = "<group>"; };
 		045BBB33151B13620052BB0B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,10 +46,6 @@
 		045BBB3F151B13620052BB0B /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		045BBB40151B13620052BB0B /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		045BBB42151B13620052BB0B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		045BBB43151B13620052BB0B /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		04D601001523651B0021B416 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "ru-RU"; path = "/Users/ssv/Projects/MyDay/MyDay/ru-RU.lproj/MainStoryboard_iPhone.storyboard"; sourceTree = "<absolute>"; };
-		04D601011523651B0021B416 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "ru-RU"; path = "/Users/ssv/Projects/MyDay/MyDay/ru-RU.lproj/MainStoryboard_iPad.storyboard"; sourceTree = "<absolute>"; };
-		04D601021523651B0021B416 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "/Users/ssv/Projects/MyDay/MyDay/ru-RU.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +116,8 @@
 		045BBB2B151B13620052BB0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				042741E115283BCC00AA81E0 /* Localizable.strings */,
 				045BBB2C151B13620052BB0B /* MyDay-Info.plist */,
-				045BBB2D151B13620052BB0B /* InfoPlist.strings */,
 				045BBB30151B13620052BB0B /* main.m */,
 				045BBB32151B13620052BB0B /* MyDay-Prefix.pch */,
 			);
@@ -148,7 +148,7 @@
 				045BBB3F151B13620052BB0B /* MasterViewController.h */,
 				045BBB40151B13620052BB0B /* MasterViewController.m */,
 				045BBB42151B13620052BB0B /* DetailViewController.h */,
-				045BBB43151B13620052BB0B /* DetailViewController.m */,
+				042741DA152837A900AA81E0 /* DetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -195,6 +195,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
+				"ru-RU",
+				ru,
 			);
 			mainGroup = 045BBB13151B135D0052BB0B;
 			productRefGroup = 045BBB1F151B13620052BB0B /* Products */;
@@ -211,9 +214,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				045BBB2F151B13620052BB0B /* InfoPlist.strings in Resources */,
 				045BBB38151B13620052BB0B /* MainStoryboard_iPhone.storyboard in Resources */,
 				045BBB3B151B13620052BB0B /* MainStoryboard_iPad.storyboard in Resources */,
+				042741DF15283BCC00AA81E0 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +231,7 @@
 				045BBB35151B13620052BB0B /* AppDelegate.m in Sources */,
 				045BBB3E151B13620052BB0B /* MyDay.xcdatamodeld in Sources */,
 				045BBB41151B13620052BB0B /* MasterViewController.m in Sources */,
-				045BBB44151B13620052BB0B /* DetailViewController.m in Sources */,
+				042741D9152837A900AA81E0 /* DetailViewController.m in Sources */,
 				0437A79A151B411800E8DDB2 /* NSDate+TimeUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,20 +239,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		045BBB2D151B13620052BB0B /* InfoPlist.strings */ = {
+		042741E115283BCC00AA81E0 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				045BBB2E151B13620052BB0B /* en */,
-				04D601021523651B0021B416 /* ru-RU */,
+				042741E015283BCC00AA81E0 /* en */,
+				042741E215283BD300AA81E0 /* ru */,
 			);
-			name = InfoPlist.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		045BBB36151B13620052BB0B /* MainStoryboard_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				045BBB37151B13620052BB0B /* en */,
-				04D601001523651B0021B416 /* ru-RU */,
+				042741DB152837D400AA81E0 /* ru */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -258,7 +261,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				045BBB3A151B13620052BB0B /* en */,
-				04D601011523651B0021B416 /* ru-RU */,
+				042741DC152837D400AA81E0 /* ru */,
 			);
 			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Martynov (3QP4L5HL95)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -287,6 +291,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -298,6 +303,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Martynov (3QP4L5HL95)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -307,6 +313,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

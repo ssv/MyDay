@@ -19,4 +19,6 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+- (IBAction)iconTapped:(id)sender;
+
 @end

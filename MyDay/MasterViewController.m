@@ -80,6 +80,11 @@
 
     [newManagedObject setValue:@"" forKey:@"title"];
     
+    // TODO remove me!
+    BOOL checked = rand() % 2;
+    NSLog(@"new item will be %d", checked);
+    [newManagedObject setValue:[NSNumber numberWithBool:checked] forKey:@"done"];
+    
     // Save the context.
     NSError *error = nil;
     if (![context save:&error]) {
@@ -273,6 +278,23 @@
     
     NSDate *taskDate = (NSDate *)[object valueForKey:@"date"];
     cell.detailTextLabel.text = [taskDate formatTime];
+    
+    BOOL checked = [(NSNumber *)[object valueForKey:@"done"] boolValue];
+    cell.imageView.image = [UIImage imageNamed:(checked ? @"checked.png" : @"unchecked.png")];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    cell.accessoryView = button;
+}
+
+- (IBAction)iconTapped:(id)sender {
+    UITableViewCell *cell = (UITableViewCell *)((UITapGestureRecognizer *)sender).view.superview.superview;
+    NSLog(@"%@", cell);
+    NSIndexPath *indexPathForClickedCell = [self.tableView indexPathForCell:cell];
+    NSLog(@"%@", indexPathForClickedCell);
+    id clickedObject = [self.fetchedResultsController objectAtIndexPath:indexPathForClickedCell];
+    BOOL done = [(NSNumber *)[clickedObject valueForKey:@"done"] boolValue];
+    [clickedObject setValue:[NSNumber numberWithBool:!done] forKey:@"done"];
+    [self.tableView reloadData];
 }
 
 @end

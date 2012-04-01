@@ -20,6 +20,8 @@
 		045BBB3B151B13620052BB0B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045BBB39151B13620052BB0B /* MainStoryboard_iPad.storyboard */; };
 		045BBB3E151B13620052BB0B /* MyDay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 045BBB3C151B13620052BB0B /* MyDay.xcdatamodeld */; };
 		045BBB41151B13620052BB0B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BBB40151B13620052BB0B /* MasterViewController.m */; };
+		046C02DB1528422200D7F51B /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 046C02D91528422200D7F51B /* checked.png */; };
+		046C02DC1528422200D7F51B /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 046C02DA1528422200D7F51B /* unchecked.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		045BBB3F151B13620052BB0B /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		045BBB40151B13620052BB0B /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		045BBB42151B13620052BB0B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		046C02D91528422200D7F51B /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
+		046C02DA1528422200D7F51B /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 		045BBB2B151B13620052BB0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				046C02DE1528422700D7F51B /* images */,
 				042741E115283BCC00AA81E0 /* Localizable.strings */,
 				045BBB2C151B13620052BB0B /* MyDay-Info.plist */,
 				045BBB30151B13620052BB0B /* main.m */,
@@ -159,6 +164,15 @@
 				045BBB3C151B13620052BB0B /* MyDay.xcdatamodeld */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		046C02DE1528422700D7F51B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				046C02D91528422200D7F51B /* checked.png */,
+				046C02DA1528422200D7F51B /* unchecked.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +231,8 @@
 				045BBB38151B13620052BB0B /* MainStoryboard_iPhone.storyboard in Resources */,
 				045BBB3B151B13620052BB0B /* MainStoryboard_iPad.storyboard in Resources */,
 				042741DF15283BCC00AA81E0 /* Localizable.strings in Resources */,
+				046C02DB1528422200D7F51B /* checked.png in Resources */,
+				046C02DC1528422200D7F51B /* unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

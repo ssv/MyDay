@@ -291,9 +291,7 @@
 
 - (IBAction)iconTapped:(id)sender {
     UITableViewCell *cell = (UITableViewCell *)((UITapGestureRecognizer *)sender).view.superview.superview;
-    NSLog(@"%@", cell);
     NSIndexPath *indexPathForClickedCell = [self.tableView indexPathForCell:cell];
-    NSLog(@"%@", indexPathForClickedCell);
     id clickedObject = [self.fetchedResultsController objectAtIndexPath:indexPathForClickedCell];
     BOOL done = [(NSNumber *)[clickedObject valueForKey:@"done"] boolValue];
     [clickedObject setValue:[NSNumber numberWithBool:!done] forKey:@"done"];

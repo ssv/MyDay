@@ -50,7 +50,6 @@
 		045BBB42151B13620052BB0B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		046C02D91528422200D7F51B /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		046C02DA1528422200D7F51B /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
-		049E757E1529FE76003BB896 /* MyDay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MyDay.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +107,6 @@
 		045BBB2A151B13620052BB0B /* MyDay */ = {
 			isa = PBXGroup;
 			children = (
-				049E757E1529FE76003BB896 /* MyDay.entitlements */,
 				045FA37C151B1C5000409355 /* Application */,
 				045FA37F151B1C6B00409355 /* Models */,
 				045FA37D151B1C5900409355 /* Views */,
@@ -341,11 +339,13 @@
 		045BBB48151B13620052BB0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = MyDay/MyDay.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Martynov (3QP4L5HL95)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyDay/MyDay-Prefix.pch";
 				INFOPLIST_FILE = "MyDay/MyDay-Info.plist";
+				INSTALL_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4A4AB0A5-FE9C-4C08-AE7F-BDE678C75E29";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -353,10 +353,13 @@
 		045BBB49151B13620052BB0B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergey Martynov (3QP4L5HL95)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyDay/MyDay-Prefix.pch";
 				INFOPLIST_FILE = "MyDay/MyDay-Info.plist";
+				INSTALL_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4A4AB0A5-FE9C-4C08-AE7F-BDE678C75E29";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

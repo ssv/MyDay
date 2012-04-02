@@ -22,6 +22,8 @@
 		045BBB41151B13620052BB0B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BBB40151B13620052BB0B /* MasterViewController.m */; };
 		046C02DB1528422200D7F51B /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 046C02D91528422200D7F51B /* checked.png */; };
 		046C02DC1528422200D7F51B /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 046C02DA1528422200D7F51B /* unchecked.png */; };
+		0495D286152A061D00F55A1F /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0495D285152A061D00F55A1F /* icon@2x.png */; };
+		0495D288152A062300F55A1F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0495D287152A062300F55A1F /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		045BBB42151B13620052BB0B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		046C02D91528422200D7F51B /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		046C02DA1528422200D7F51B /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
+		0495D285152A061D00F55A1F /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		0495D287152A062300F55A1F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,8 @@
 		046C02DE1528422700D7F51B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0495D287152A062300F55A1F /* icon.png */,
+				0495D285152A061D00F55A1F /* icon@2x.png */,
 				046C02D91528422200D7F51B /* checked.png */,
 				046C02DA1528422200D7F51B /* unchecked.png */,
 			);
@@ -233,6 +239,8 @@
 				042741DF15283BCC00AA81E0 /* Localizable.strings in Resources */,
 				046C02DB1528422200D7F51B /* checked.png in Resources */,
 				046C02DC1528422200D7F51B /* unchecked.png in Resources */,
+				0495D286152A061D00F55A1F /* icon@2x.png in Resources */,
+				0495D288152A062300F55A1F /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

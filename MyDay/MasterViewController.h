@@ -19,6 +19,9 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+@property (assign, nonatomic) BOOL active;
+
 - (IBAction)iconTapped:(id)sender;
+- (IBAction)activeFilterSwitched:(id)sender;
 
 @end

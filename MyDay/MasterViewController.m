@@ -22,6 +22,8 @@
 @synthesize fetchedResultsController = __fetchedResultsController;
 @synthesize managedObjectContext = __managedObjectContext;
 
+@synthesize active;
+
 - (void)awakeFromNib
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -79,12 +81,7 @@
     [newManagedObject setValue:preferredDate forKey:@"date"];
 
     [newManagedObject setValue:@"" forKey:@"title"];
-    
-    // TODO remove me!
-    BOOL checked = rand() % 2;
-    NSLog(@"new item will be %d", checked);
-    [newManagedObject setValue:[NSNumber numberWithBool:checked] forKey:@"done"];
-    
+        
     // Save the context.
     NSError *error = nil;
     if (![context save:&error]) {
@@ -171,12 +168,7 @@
 
 #pragma mark - Fetched results controller
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (__fetchedResultsController != nil) {
-        return __fetchedResultsController;
-    }
-    
+- (NSFetchRequest *)prepareFetchRequestForTaskState:(BOOL)taskState {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
@@ -188,11 +180,17 @@
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-    
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"done = %d", self.active];
+    [fetchRequest setPredicate:predicate];
+    
+    return fetchRequest;
+}
+
+- (void)fetchTasksForState:(BOOL)taskState {
+    // TODO it smells :(
+    NSFetchRequest *fetchRequest = [self prepareFetchRequestForTaskState:taskState];
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                 managedObjectContext:self.managedObjectContext
                                                                                                   sectionNameKeyPath:@"date.dateKind"
@@ -202,11 +200,21 @@
     
 	NSError *error = nil;
 	if (![self.fetchedResultsController performFetch:&error]) {
-	     // Replace this implementation with code to handle the error appropriately.
-	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
+    
+}
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (__fetchedResultsController != nil) {
+        return __fetchedResultsController;
+    }
+    
+    [self fetchTasksForState:self.active];
     
     return __fetchedResultsController;
 }    
@@ -295,6 +303,15 @@
     id clickedObject = [self.fetchedResultsController objectAtIndexPath:indexPathForClickedCell];
     BOOL done = [(NSNumber *)[clickedObject valueForKey:@"done"] boolValue];
     [clickedObject setValue:[NSNumber numberWithBool:!done] forKey:@"done"];
+    [self.tableView reloadData];
+}
+
+- (IBAction)activeFilterSwitched:(id)sender {
+    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+
+    self.active = (BOOL)segmentedControl.selectedSegmentIndex;
+    [self fetchTasksForState:self.active];
+
     [self.tableView reloadData];
 }
 

@@ -76,17 +76,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="36">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="pZ8-Wq-A8U">
-                            <rect key="frame" x="74" y="7" width="172" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Active"/>
-                                <segment title="Completed"/>
-                            </segments>
-                            <connections>
-                                <action selector="activeFilterSwitched:" destination="12" eventType="valueChanged" id="3oV-Q3-B6W"/>
-                            </connections>
-                        </segmentedControl>
                     </navigationItem>
                 </tableViewController>
             </objects>

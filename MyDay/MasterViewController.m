@@ -33,11 +33,25 @@
     [super awakeFromNib];
 }
 
+- (void)loadActiveInactiveSwitch {
+    NSArray *items = [NSArray arrayWithObjects:
+                      NSLocalizedString(@"Active", @"Active tasks"),
+                      NSLocalizedString(@"Completed", @"Completed tasks"),
+                      nil];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
+    [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    [segmentedControl setSelectedSegmentIndex:0];
+    [segmentedControl addTarget:self action:@selector(activeFilterSwitched:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = segmentedControl;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    [self loadActiveInactiveSwitch];
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2429" systemVersion="12A154q" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1421"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -58,16 +58,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <gestureRecognizers/>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="oO2-wB-biM" appends="YES" id="CmN-gQ-RpM"/>
-                                            </connections>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="21" kind="push" identifier="showDetail" id="jZb-fq-zAk"/>
+                                    <segue destination="21" identifier="showDetail" kind="push" id="jZb-fq-zAk"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -79,11 +76,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Events" id="36"/>
                 </tableViewController>
-                <tapGestureRecognizer id="oO2-wB-biM">
-                    <connections>
-                        <action selector="iconTapped:" destination="12" id="UGU-jG-VtV"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="459" y="64"/>
         </scene>

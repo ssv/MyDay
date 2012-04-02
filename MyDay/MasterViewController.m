@@ -282,6 +282,9 @@
     BOOL checked = [(NSNumber *)[object valueForKey:@"done"] boolValue];
     cell.imageView.image = [UIImage imageNamed:(checked ? @"checked.png" : @"unchecked.png")];
     
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconTapped:)];
+    [cell.imageView addGestureRecognizer:gesture];
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     cell.accessoryView = button;
 }

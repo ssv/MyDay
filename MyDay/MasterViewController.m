@@ -13,6 +13,7 @@
 #import "NSDate+TimeUtils.h"
 
 @interface MasterViewController ()
+- (void)loadActiveInactiveSwitch;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
@@ -22,7 +23,10 @@
 @synthesize fetchedResultsController = __fetchedResultsController;
 @synthesize managedObjectContext = __managedObjectContext;
 
-@synthesize active;
+@synthesize completed;
+@synthesize taskToEdit;
+
+#pragma mark - View lifecycle
 
 - (void)awakeFromNib
 {
@@ -31,18 +35,6 @@
         self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     }
     [super awakeFromNib];
-}
-
-- (void)loadActiveInactiveSwitch {
-    NSArray *items = [NSArray arrayWithObjects:
-                      NSLocalizedString(@"Active", @"Active tasks"),
-                      NSLocalizedString(@"Completed", @"Completed tasks"),
-                      nil];
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
-    [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
-    [segmentedControl setSelectedSegmentIndex:0];
-    [segmentedControl addTarget:self action:@selector(activeFilterSwitched:) forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = segmentedControl;
 }
 
 - (void)viewDidLoad
@@ -73,6 +65,37 @@
     }
 }
 
+#pragma mark - UI
+
+- (void)loadActiveInactiveSwitch {
+    NSArray *items = [NSArray arrayWithObjects:
+                      NSLocalizedString(@"Active", @"Active tasks"),
+                      NSLocalizedString(@"Completed", @"Completed tasks"),
+                      nil];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
+    [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    [segmentedControl setSelectedSegmentIndex:0];
+    [segmentedControl addTarget:self action:@selector(activeFilterSwitched:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = segmentedControl;
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [[object valueForKey:@"title"] description];
+    
+    NSDate *taskDate = (NSDate *)[object valueForKey:@"date"];
+    cell.detailTextLabel.text = [taskDate formatTime];
+    
+    BOOL checked = [(NSNumber *)[object valueForKey:@"done"] boolValue];
+    cell.imageView.image = [UIImage imageNamed:(checked ? @"checked.png" : @"unchecked.png")];
+    
+    if (cell.imageView.gestureRecognizers.count == 0) {
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconTapped:)];
+        [cell.imageView addGestureRecognizer:gesture];
+    }
+}
+
 #pragma mark - Handling objects
 
 - (void)insertNewObject:(id)sender
@@ -98,15 +121,14 @@
         
     // Save the context.
     NSError *error = nil;
-    if (![context save:&error]) {
-         // Replace this implementation with code to handle the error appropriately.
-         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+    if ([context save:&error]) {
+        self.taskToEdit = newManagedObject;
+        [self performSegueWithIdentifier:@"showDetail" sender:self];
+    } else {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
-    } else {
-        NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:newManagedObject];
-        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        [self performSegueWithIdentifier:@"showDetail" sender:self];
     }
 }
 
@@ -174,9 +196,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setDetailItem:object];
+        [[segue destinationViewController] setDetailItem:self.taskToEdit];
     }
 }
 
@@ -191,24 +211,28 @@
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
-    // Edit the sort key as appropriate.
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:(self.completed ? @"done == YES" : @"done == NO")];
+//    [fetchRequest setPredicate:predicate];
+
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"done = %d", self.active];
-    [fetchRequest setPredicate:predicate];
     
     return fetchRequest;
 }
 
 - (void)fetchTasksForState:(BOOL)taskState {
-    // TODO it smells :(
     NSFetchRequest *fetchRequest = [self prepareFetchRequestForTaskState:taskState];
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                 managedObjectContext:self.managedObjectContext
                                                                                                   sectionNameKeyPath:@"date.dateKind"
                                                                                                            cacheName:nil];
+    
+    if (__fetchedResultsController != nil) {
+        __fetchedResultsController.delegate = nil;
+        self.fetchedResultsController = nil;
+    }
+    
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -228,7 +252,7 @@
         return __fetchedResultsController;
     }
     
-    [self fetchTasksForState:self.active];
+    [self fetchTasksForState:self.completed];
     
     return __fetchedResultsController;
 }    
@@ -283,48 +307,26 @@
     [self.tableView endUpdates];
 }
 
-/*
-// Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    // In the simplest, most efficient, case, reload the table view.
-    [self.tableView reloadData];
-}
- */
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"title"] description];
-    
-    NSDate *taskDate = (NSDate *)[object valueForKey:@"date"];
-    cell.detailTextLabel.text = [taskDate formatTime];
-    
-    BOOL checked = [(NSNumber *)[object valueForKey:@"done"] boolValue];
-    cell.imageView.image = [UIImage imageNamed:(checked ? @"checked.png" : @"unchecked.png")];
-    
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconTapped:)];
-    [cell.imageView addGestureRecognizer:gesture];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    cell.accessoryView = button;
-}
+#pragma mark - Handling user actions
 
 - (IBAction)iconTapped:(id)sender {
     UITableViewCell *cell = (UITableViewCell *)((UITapGestureRecognizer *)sender).view.superview.superview;
+
     NSIndexPath *indexPathForClickedCell = [self.tableView indexPathForCell:cell];
+    
     id clickedObject = [self.fetchedResultsController objectAtIndexPath:indexPathForClickedCell];
-    BOOL done = [(NSNumber *)[clickedObject valueForKey:@"done"] boolValue];
-    [clickedObject setValue:[NSNumber numberWithBool:!done] forKey:@"done"];
+    
+    BOOL taskDone = [(NSNumber *)[clickedObject valueForKey:@"done"] boolValue];
+    [clickedObject setValue:[NSNumber numberWithBool:!taskDone] forKey:@"done"];
+    
     [self.tableView reloadData];
 }
 
 - (IBAction)activeFilterSwitched:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
 
-    self.active = (BOOL)segmentedControl.selectedSegmentIndex;
-    [self fetchTasksForState:self.active];
+    self.completed = (BOOL)segmentedControl.selectedSegmentIndex;
+    [self fetchTasksForState:self.completed];
 
     [self.tableView reloadData];
 }

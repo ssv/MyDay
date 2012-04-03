@@ -116,6 +116,8 @@
     anHour.hour = 1;
     NSDate *preferredDate = [gregorian dateByAddingComponents:anHour toDate:creationDateNoMins options:0];
     [newManagedObject setValue:preferredDate forKey:@"date"];
+    
+    [newManagedObject setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
 
     [newManagedObject setValue:@"" forKey:@"title"];
         

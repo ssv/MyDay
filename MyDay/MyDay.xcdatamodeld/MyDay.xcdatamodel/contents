@@ -2,14 +2,14 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1416" systemVersion="12A154q" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Task">
         <attribute name="alert" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="completed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date">
             <userInfo/>
         </attribute>
-        <attribute name="done" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <userInfo/>
     </entity>
     <elements>
-        <element name="Task" positionX="261" positionY="189" width="128" height="120"/>
+        <element name="Task" positionX="261" positionY="189" width="128" height="105"/>
     </elements>
 </model>

@@ -87,7 +87,7 @@
     NSDate *taskDate = (NSDate *)[object valueForKey:@"date"];
     cell.detailTextLabel.text = [taskDate formatTime];
     
-    BOOL checked = [(NSNumber *)[object valueForKey:@"done"] boolValue];
+    BOOL checked = [(NSNumber *)[object valueForKey:@"completed"] boolValue];
     cell.imageView.image = [UIImage imageNamed:(checked ? @"checked.png" : @"unchecked.png")];
     
     if (cell.imageView.gestureRecognizers.count == 0) {
@@ -211,8 +211,8 @@
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:(self.completed ? @"done == YES" : @"done == NO")];
-//    [fetchRequest setPredicate:predicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:(self.completed ? @"completed == TRUE" : @"completed == FALSE")];
+    [fetchRequest setPredicate:predicate];
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
@@ -316,8 +316,14 @@
     
     id clickedObject = [self.fetchedResultsController objectAtIndexPath:indexPathForClickedCell];
     
-    BOOL taskDone = [(NSNumber *)[clickedObject valueForKey:@"done"] boolValue];
-    [clickedObject setValue:[NSNumber numberWithBool:!taskDone] forKey:@"done"];
+    BOOL taskDone = [(NSNumber *)[clickedObject valueForKey:@"completed"] boolValue];
+    [clickedObject setValue:[NSNumber numberWithBool:!taskDone] forKey:@"completed"];
+    
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Error: %@", error);
+        abort();
+    }
     
     [self.tableView reloadData];
 }

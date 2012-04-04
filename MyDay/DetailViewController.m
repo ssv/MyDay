@@ -170,7 +170,8 @@
 }
 
 - (void)save {
-    [self.detailItem setValue:self.uiTitle.text forKey:@"title"];
+    NSString *titleText = self.uiTitle.text;
+    [self.detailItem setValue:titleText forKey:@"title"];
 
     NSCalendar *gregorian = [NSCalendar currentCalendar];
     NSDate *compiledDate = [gregorian dateByAddingComponents:[self.taskPartTime timeComponents] toDate:self.taskPartDate options:0];
@@ -194,12 +195,20 @@
             alert = ALERT_NO;
             break;
     }
+    // TODO alert changed - change scheduled notification if exists!
     [self.detailItem setValue:[NSNumber numberWithLong:alert] forKey:@"alert"];
 
-    // TODO schedule (or re-schedule) LN here!
-    
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate saveContext];
+
+    if (alert != ALERT_NO) {
+        UILocalNotification *notification = [UILocalNotification new];
+        notification.alertBody = titleText;
+        notification.alertAction = @"";
+        notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:compiledDate];
+        NSLog(@"Scheduling fireDate to: %@", notification.fireDate);
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
 }
 
 #pragma mark - Date and time picker

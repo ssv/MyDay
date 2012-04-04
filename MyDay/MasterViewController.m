@@ -117,6 +117,8 @@
     [newManagedObject setValue:preferredDate forKey:@"date"];
     
     [newManagedObject setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
+    
+    [newManagedObject setValue:[NSNumber numberWithLong:-1] forKey:@"alert"];
 
     [newManagedObject setValue:@"" forKey:@"title"];
         

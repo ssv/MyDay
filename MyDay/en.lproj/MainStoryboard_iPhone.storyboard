@@ -95,7 +95,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" hint="Title"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="21" id="Zca-LS-hfc"/>
                                 </connections>
@@ -190,6 +190,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="uiAlertSwitch" destination="iv5-mJ-Fae" id="cwk-gV-x5a"/>
                         <outlet property="uiDate" destination="vfA-Ws-nKJ" id="hSB-Sv-QN2"/>
                         <outlet property="uiDateSwitch" destination="C5K-gS-t3x" id="14P-1K-Jjv"/>
                         <outlet property="uiTime" destination="44T-IO-OEU" id="XEh-05-R78"/>
@@ -212,6 +213,7 @@
                 <relationship kind="action" name="changeDateViaButton:"/>
                 <relationship kind="action" name="changeTime"/>
                 <relationship kind="action" name="done"/>
+                <relationship kind="outlet" name="uiAlertSwitch" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="uiDate" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="uiDateSwitch" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="uiTime" candidateClass="UIButton"/>

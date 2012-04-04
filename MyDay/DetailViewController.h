@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *uiDate;
 @property (strong, nonatomic) IBOutlet UIButton *uiTime;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *uiDateSwitch;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *uiAlertSwitch;
 
 @property (strong, nonatomic) NSDate *taskPartDate;
 @property (strong, nonatomic) NSDate *taskPartTime;

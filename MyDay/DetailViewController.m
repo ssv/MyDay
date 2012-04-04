@@ -10,6 +10,11 @@
 #import "NSDate+TimeUtils.h"
 #import "AppDelegate.h"
 
+#define ALERT_NO    -1l
+#define ALERT_5_MIN 5*60l
+#define ALERT_HOUR  60*60l
+#define ALERT_DAY   24*60*60l
+
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
@@ -21,6 +26,7 @@
 @synthesize datePickerView;
 @synthesize uiTitle;
 @synthesize uiDateSwitch;
+@synthesize uiAlertSwitch;
 
 @synthesize detailItem = _detailItem;
 @synthesize masterPopoverController = _masterPopoverController;
@@ -68,7 +74,27 @@
         NSDate *taskDate = [self.detailItem valueForKey:@"date"];
         self.taskPartDate = [taskDate onlyDate];
         self.taskPartTime = [taskDate onlyTime];
+        
+        long alert = [[self.detailItem valueForKey:@"alert"] longValue];
 
+        switch (alert) {
+            case ALERT_5_MIN:  // 5 minutes
+                [self.uiAlertSwitch setSelectedSegmentIndex:1];
+                break;
+
+            case ALERT_HOUR: // 1 hour
+                [self.uiAlertSwitch setSelectedSegmentIndex:2];
+                break;
+            
+            case ALERT_DAY: // 1 day
+                [self.uiAlertSwitch setSelectedSegmentIndex:3];
+                break;
+                
+            default:
+                [self.uiAlertSwitch setSelectedSegmentIndex:0];
+                break;
+        }
+        
         [self updateView];
     }
 }
@@ -100,6 +126,7 @@
 - (void)viewDidUnload
 {
     [self setUiDateSwitch:nil];
+    [self setUiAlertSwitch:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -108,6 +135,7 @@
     self.uiTitle = nil;
     self.uiTime = nil;
     self.uiDate = nil;
+    self.uiAlertSwitch = nil;
 
     self.taskPartDate = nil;
     self.taskPartTime = nil;
@@ -147,6 +175,28 @@
     NSCalendar *gregorian = [NSCalendar currentCalendar];
     NSDate *compiledDate = [gregorian dateByAddingComponents:[self.taskPartTime timeComponents] toDate:self.taskPartDate options:0];
     [self.detailItem setValue:compiledDate forKey:@"date"];
+    
+    long alert;
+    switch (self.uiAlertSwitch.selectedSegmentIndex) {
+        case 1:
+            alert = ALERT_5_MIN;
+            break;
+
+        case 2:
+            alert = ALERT_HOUR;
+            break;
+        
+        case 3:
+            alert = ALERT_DAY;
+            break;
+            
+        default:
+            alert = ALERT_NO;
+            break;
+    }
+    [self.detailItem setValue:[NSNumber numberWithLong:alert] forKey:@"alert"];
+
+    // TODO schedule (or re-schedule) LN here!
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate saveContext];

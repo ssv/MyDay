@@ -219,6 +219,7 @@
             notification.alertBody = titleText;
             notification.alertAction = @"";
             notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:compiledDate];
+            [notification.userInfo setValue:[self.detailItem objectID] forKey:@"taskId"];
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
         }
     }

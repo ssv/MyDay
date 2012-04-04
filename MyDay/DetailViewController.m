@@ -201,6 +201,7 @@
     long oldAlert = [[self.detailItem valueForKey:@"alert"] longValue];
 
     // TODO date can be changed too!
+    // TODO #2 should we schedule completed task?
     if (oldAlert != alert) {
         
         if (oldAlert != ALERT_NO) {

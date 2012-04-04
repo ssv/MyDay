@@ -83,6 +83,15 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		044CBD9A152C4A3400966920 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				042741E115283BCC00AA81E0 /* Localizable.strings */,
+				044CBD8F152C48E100966920 /* InfoPlist.strings */,
+			);
+			name = Strings;
+			sourceTree = "<group>";
+		};
 		045BBB13151B135D0052BB0B = {
 			isa = PBXGroup;
 			children = (
@@ -120,7 +129,6 @@
 				045FA37E151B1C6200409355 /* Controllers */,
 				0437A795151B403B00E8DDB2 /* Utils */,
 				045BBB2B151B13620052BB0B /* Supporting Files */,
-				044CBD8F152C48E100966920 /* InfoPlist.strings */,
 			);
 			path = MyDay;
 			sourceTree = "<group>";
@@ -128,8 +136,8 @@
 		045BBB2B151B13620052BB0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				046C02DE1528422700D7F51B /* images */,
-				042741E115283BCC00AA81E0 /* Localizable.strings */,
+				044CBD9A152C4A3400966920 /* Strings */,
+				046C02DE1528422700D7F51B /* Images */,
 				045BBB2C151B13620052BB0B /* MyDay-Info.plist */,
 				045BBB30151B13620052BB0B /* main.m */,
 				045BBB32151B13620052BB0B /* MyDay-Prefix.pch */,
@@ -174,7 +182,7 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		046C02DE1528422700D7F51B /* images */ = {
+		046C02DE1528422700D7F51B /* Images */ = {
 			isa = PBXGroup;
 			children = (
 				0495D287152A062300F55A1F /* icon.png */,
@@ -182,7 +190,7 @@
 				046C02D91528422200D7F51B /* checked.png */,
 				046C02DA1528422200D7F51B /* unchecked.png */,
 			);
-			name = images;
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

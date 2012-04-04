@@ -335,4 +335,8 @@
     [self.tableView reloadData];
 }
 
+- (void)showTask:(NSManagedObjectID *)taskId {
+    NSLog(@"TODO scroll to task with ID = %@", taskId);
+}
+
 @end

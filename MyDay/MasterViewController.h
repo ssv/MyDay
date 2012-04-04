@@ -23,5 +23,6 @@
 
 - (IBAction)iconTapped:(id)sender;
 - (IBAction)activeFilterSwitched:(id)sender;
+- (void)showTask:(NSManagedObjectID *)taskId;
 
 @end

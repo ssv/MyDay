@@ -33,7 +33,19 @@
         MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     }
+    
+    UILocalNotification *launchInitiator = [launchOptions valueForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (launchInitiator != nil) {
+        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+        MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
+        [controller showTask:[launchInitiator.userInfo valueForKey:@"taskId"]];
+    }
+    
     return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    // TODO show UIAlert?
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

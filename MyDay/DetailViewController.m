@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 #import "DetailViewController.h"
 #import "NSDate+TimeUtils.h"
 #import "AppDelegate.h"
@@ -195,20 +197,37 @@
             alert = ALERT_NO;
             break;
     }
-    // TODO alert changed - change scheduled notification if exists!
+    
+    long oldAlert = [[self.detailItem valueForKey:@"alert"] longValue];
+
+    // TODO date can be changed too!
+    if (oldAlert != alert) {
+        
+        if (oldAlert != ALERT_NO) {
+            NSArray *allNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+            NSArray *toDiscard = [allNotifications filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+                UILocalNotification *testedNotification = (UILocalNotification *)evaluatedObject;
+                return [[[testedNotification userInfo] objectForKey:@"taskId"] isEqual:[self.detailItem objectID]];
+            }]];
+            for (UILocalNotification *notification in toDiscard) {
+                [[UIApplication sharedApplication] cancelLocalNotification:notification];
+            }
+        }
+
+        if (alert != ALERT_NO) {
+            UILocalNotification *notification = [UILocalNotification new];
+            notification.alertBody = titleText;
+            notification.alertAction = @"";
+            notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:compiledDate];
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
+    
     [self.detailItem setValue:[NSNumber numberWithLong:alert] forKey:@"alert"];
 
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate saveContext];
 
-    if (alert != ALERT_NO) {
-        UILocalNotification *notification = [UILocalNotification new];
-        notification.alertBody = titleText;
-        notification.alertAction = @"";
-        notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:compiledDate];
-        NSLog(@"Scheduling fireDate to: %@", notification.fireDate);
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    }
 }
 
 #pragma mark - Date and time picker

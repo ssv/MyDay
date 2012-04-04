@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  MyDay
+
+  Created by Stas Sviridenko on 04.04.12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+"CFBundleDisplayName" = "Мой День";
+"CFBundleName" = "Мой День";

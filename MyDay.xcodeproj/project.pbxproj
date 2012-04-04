@@ -10,6 +10,7 @@
 		042741D9152837A900AA81E0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042741DA152837A900AA81E0 /* DetailViewController.m */; };
 		042741DF15283BCC00AA81E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042741E115283BCC00AA81E0 /* Localizable.strings */; };
 		0437A79A151B411800E8DDB2 /* NSDate+TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0437A799151B411800E8DDB2 /* NSDate+TimeUtils.m */; };
+		044CBD8D152C48E100966920 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 044CBD8F152C48E100966920 /* InfoPlist.strings */; };
 		045BBB23151B13620052BB0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB22151B13620052BB0B /* UIKit.framework */; };
 		045BBB25151B13620052BB0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB24151B13620052BB0B /* Foundation.framework */; };
 		045BBB27151B13620052BB0B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045BBB26151B13620052BB0B /* CoreGraphics.framework */; };
@@ -34,6 +35,8 @@
 		042741E215283BD300AA81E0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0437A798151B411800E8DDB2 /* NSDate+TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeUtils.h"; sourceTree = "<group>"; };
 		0437A799151B411800E8DDB2 /* NSDate+TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeUtils.m"; sourceTree = "<group>"; };
+		044CBD8E152C48E100966920 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		044CBD90152C48E500966920 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		045BBB1E151B13620052BB0B /* MyDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045BBB22151B13620052BB0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		045BBB24151B13620052BB0B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -117,6 +120,7 @@
 				045FA37E151B1C6200409355 /* Controllers */,
 				0437A795151B403B00E8DDB2 /* Utils */,
 				045BBB2B151B13620052BB0B /* Supporting Files */,
+				044CBD8F152C48E100966920 /* InfoPlist.strings */,
 			);
 			path = MyDay;
 			sourceTree = "<group>";
@@ -241,6 +245,7 @@
 				046C02DC1528422200D7F51B /* unchecked.png in Resources */,
 				0495D286152A061D00F55A1F /* icon@2x.png in Resources */,
 				0495D288152A062300F55A1F /* icon.png in Resources */,
+				044CBD8D152C48E100966920 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +275,15 @@
 				042741E215283BD300AA81E0 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		044CBD8F152C48E100966920 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				044CBD8E152C48E100966920 /* en */,
+				044CBD90152C48E500966920 /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		045BBB36151B13620052BB0B /* MainStoryboard_iPhone.storyboard */ = {

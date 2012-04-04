@@ -20,7 +20,6 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (assign, nonatomic) BOOL completed;
-@property (weak, nonatomic) NSManagedObject *taskToEdit;
 
 - (IBAction)iconTapped:(id)sender;
 - (IBAction)activeFilterSwitched:(id)sender;

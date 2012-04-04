@@ -24,7 +24,6 @@
 @synthesize managedObjectContext = __managedObjectContext;
 
 @synthesize completed;
-@synthesize taskToEdit;
 
 #pragma mark - View lifecycle
 
@@ -124,7 +123,9 @@
     // Save the context.
     NSError *error = nil;
     if ([context save:&error]) {
-        self.taskToEdit = newManagedObject;
+//        [self.tableView reloadData];
+        NSIndexPath *indexPathForNewObject = [self.fetchedResultsController indexPathForObject:newManagedObject];
+        [self.tableView selectRowAtIndexPath:indexPathForNewObject animated:YES scrollPosition:UITableViewScrollPositionTop];
         [self performSegueWithIdentifier:@"showDetail" sender:self];
     } else {
         // Replace this implementation with code to handle the error appropriately.
@@ -187,18 +188,18 @@
     return NO;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        self.detailViewController.detailItem = object;
-    }
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    self.taskToEdit = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+//}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        [[segue destinationViewController] setDetailItem:self.taskToEdit];
+        NSIndexPath *indexPathForSelectedRow = [self.tableView indexPathForSelectedRow];
+        id taskObject = [[self fetchedResultsController] objectAtIndexPath:indexPathForSelectedRow];
+        
+        [[segue destinationViewController] setDetailItem:taskObject];
     }
 }
 

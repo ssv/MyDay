@@ -123,7 +123,6 @@
     // Save the context.
     NSError *error = nil;
     if ([context save:&error]) {
-//        [self.tableView reloadData];
         NSIndexPath *indexPathForNewObject = [self.fetchedResultsController indexPathForObject:newManagedObject];
         [self.tableView selectRowAtIndexPath:indexPathForNewObject animated:YES scrollPosition:UITableViewScrollPositionTop];
         [self performSegueWithIdentifier:@"showDetail" sender:self];
@@ -187,11 +186,6 @@
     // The table view should not be re-orderable.
     return NO;
 }
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    self.taskToEdit = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-//}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -327,8 +321,6 @@
         NSLog(@"Error: %@", error);
         abort();
     }
-    
-    [self.tableView reloadData];
 }
 
 - (IBAction)activeFilterSwitched:(id)sender {

@@ -220,9 +220,10 @@
 
 - (void)fetchTasksForState:(BOOL)taskState {
     NSFetchRequest *fetchRequest = [self prepareFetchRequestForTaskState:taskState];
+    NSString *sectionNameKeyPath = taskState ? @"date.formatShort" : @"date.dateKind";
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                 managedObjectContext:self.managedObjectContext
-                                                                                                  sectionNameKeyPath:@"date.dateKind"
+                                                                                                  sectionNameKeyPath:sectionNameKeyPath
                                                                                                            cacheName:nil];
     
     if (__fetchedResultsController != nil) {

@@ -330,7 +330,7 @@
         abort();
     }
 
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate updateLocalNotificationForTask:task];
 }
 
@@ -343,8 +343,15 @@
     [self.tableView reloadData];
 }
 
-- (void)showTask:(NSString *)managedObjectIdURIRepresentation {
-    NSLog(@"TODO scroll to task with ID = %@", managedObjectIdURIRepresentation);
+- (void)showTaskForURI:(NSString *)objectURI {
+    self.completed = NO;
+    [self fetchTasksForState:self.completed];
+    
+    id task = [self.managedObjectContext.persistentStoreCoordinator managedObjectIDForURIRepresentation:[NSURL URLWithString:objectURI]];
+    if (task != nil) {
+        NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:task];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 @end

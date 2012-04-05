@@ -23,7 +23,7 @@
 
 - (IBAction)iconTapped:(id)sender;
 - (IBAction)activeFilterSwitched:(id)sender;
-- (void)showTask:(NSString *)managedObjectIdURIRepresentation;
+- (void)showTaskForURI:(NSString *)objectURI;
 
 - (void)refresh;
 

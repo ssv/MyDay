@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-
 #import "MasterViewController.h"
 
 @implementation AppDelegate
@@ -16,6 +15,8 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
+
+#pragma mark - Managing application state
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -37,15 +38,28 @@
     UILocalNotification *launchInitiator = [launchOptions valueForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (launchInitiator != nil) {
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
-        [controller showTask:[launchInitiator.userInfo valueForKey:@"taskId"]];
+        id topController = navigationController.topViewController;
+        if ([topController isMemberOfClass:[MasterViewController class]]) {
+            MasterViewController *controller = (MasterViewController *)topController;
+            [controller showTaskForURI:[launchInitiator.userInfo valueForKey:@"taskId"]];
+        }
     }
     
     return YES;
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    // TODO show UIAlert?
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"MyDay!"
+                                                        message:notification.alertBody
+                                                       delegate:self
+                                              cancelButtonTitle:@"Dismiss"
+                                              otherButtonTitles:@"View", nil];
+    
+    NSString *taskId = [notification.userInfo valueForKey:@"taskId"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:taskId forKey:@"taskId"];
+
+    [alertView show];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -98,6 +112,21 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+#pragma mark - UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != 0) {
+        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+        id topController = navigationController.topViewController;
+        if ([topController isMemberOfClass:[MasterViewController class]]) {
+            MasterViewController *controller = (MasterViewController *)topController;
+
+            NSString *taskId = [[NSUserDefaults standardUserDefaults] valueForKey:@"taskId"];
+            [controller showTaskForURI:taskId];
+        }
+    }
 }
 
 #pragma mark - Core Data stack
@@ -181,7 +210,7 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-#pragma mark - Managing tasks
+#pragma mark - Tasks
 
 - (void)saveContext
 {

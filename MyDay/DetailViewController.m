@@ -195,7 +195,7 @@
     
     [self.detailItem setValue:[NSNumber numberWithLong:alert] forKey:@"alert"];
 
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate saveContext];
     [appDelegate updateLocalNotificationForTask:self.detailItem];
 }

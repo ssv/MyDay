@@ -13,3 +13,8 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 #endif
+
+#define ALERT_NO    -1l
+#define ALERT_5_MIN 5*60l
+#define ALERT_HOUR  60*60l
+#define ALERT_DAY   24*60*60l

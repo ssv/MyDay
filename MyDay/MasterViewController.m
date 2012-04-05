@@ -7,10 +7,9 @@
 //
 
 #import "MasterViewController.h"
-
 #import "DetailViewController.h"
-
 #import "NSDate+TimeUtils.h"
+#import "AppDelegate.h"
 
 @interface MasterViewController ()
 - (void)loadActiveInactiveSwitch;
@@ -320,16 +319,19 @@
 
     NSIndexPath *indexPathForClickedCell = [self.tableView indexPathForCell:cell];
     
-    id clickedObject = [self.fetchedResultsController objectAtIndexPath:indexPathForClickedCell];
+    id task = [self.fetchedResultsController objectAtIndexPath:indexPathForClickedCell];
     
-    BOOL taskDone = [(NSNumber *)[clickedObject valueForKey:@"completed"] boolValue];
-    [clickedObject setValue:[NSNumber numberWithBool:!taskDone] forKey:@"completed"];
+    BOOL taskDone = [(NSNumber *)[task valueForKey:@"completed"] boolValue];
+    [task setValue:[NSNumber numberWithBool:!taskDone] forKey:@"completed"];
     
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Error: %@", error);
         abort();
     }
+
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate updateLocalNotificationForTask:task];
 }
 
 - (IBAction)activeFilterSwitched:(id)sender {

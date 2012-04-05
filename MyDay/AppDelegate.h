@@ -19,4 +19,6 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+- (void)updateLocalNotificationForTask:(NSManagedObject *)task;
+
 @end

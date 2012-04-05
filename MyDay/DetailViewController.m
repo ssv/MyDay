@@ -12,11 +12,6 @@
 #import "NSDate+TimeUtils.h"
 #import "AppDelegate.h"
 
-#define ALERT_NO    -1l
-#define ALERT_5_MIN 5*60l
-#define ALERT_HOUR  60*60l
-#define ALERT_DAY   24*60*60l
-
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
@@ -198,37 +193,11 @@
             break;
     }
     
-    // cancel previous LN for this task
-    NSString *uri = [[[self.detailItem objectID] URIRepresentation] absoluteString];
-    NSArray *allNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    NSArray *toCancel = [allNotifications filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        UILocalNotification *testedNotification = (UILocalNotification *)evaluatedObject;
-        return [[[testedNotification userInfo] valueForKey:@"taskId"] isEqual:uri];
-    }]];
-    for (UILocalNotification *notification in toCancel) {
-        [[UIApplication sharedApplication] cancelLocalNotification:notification];
-    }
-
-    // TODO should we schedule completed task or task in the past?
-
-    // schedule new LN
-    if (alert != ALERT_NO) {
-        UILocalNotification *notification = [UILocalNotification new];
-
-        notification.soundName = UILocalNotificationDefaultSoundName;
-        notification.alertBody = titleText;
-        notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:compiledDate];
-
-        NSString *uri = [[[self.detailItem objectID] URIRepresentation] absoluteString];
-        notification.userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:uri, @"taskId", nil];
-        
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    }
-    
     [self.detailItem setValue:[NSNumber numberWithLong:alert] forKey:@"alert"];
 
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate saveContext];
+    [appDelegate updateLocalNotificationForTask:self.detailItem];
 }
 
 #pragma mark - Date and time picker

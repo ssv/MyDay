@@ -100,20 +100,6 @@
     [self saveContext];
 }
 
-- (void)saveContext
-{
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        } 
-    }
-}
-
 #pragma mark - Core Data stack
 
 // Returns the managed object context for the application.
@@ -193,6 +179,52 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - Managing tasks
+
+- (void)saveContext
+{
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        } 
+    }
+}
+
+- (void)updateLocalNotificationForTask:(NSManagedObject *)task {
+    // cancel previous LN for this task
+    NSString *uri = [[[task objectID] URIRepresentation] absoluteString];
+    NSArray *allNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    NSArray *toCancel = [allNotifications filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        UILocalNotification *testedNotification = (UILocalNotification *)evaluatedObject;
+        return [[[testedNotification userInfo] valueForKey:@"taskId"] isEqual:uri];
+    }]];
+    for (UILocalNotification *notification in toCancel) {
+        [[UIApplication sharedApplication] cancelLocalNotification:notification];
+    }
+    
+    // schedule new LN
+    BOOL taskIsCompleted = [[task valueForKey:@"completed"] boolValue];
+    long alert = [[task valueForKey:@"alert"] longValue];
+    
+    if (!taskIsCompleted && alert != ALERT_NO) {
+        UILocalNotification *notification = [UILocalNotification new];
+        
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.alertBody = [task valueForKey:@"title"];
+        notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:[task valueForKey:@"date"]];
+        
+        NSString *uri = [[[task objectID] URIRepresentation] absoluteString];
+        notification.userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:uri, @"taskId", nil];
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
 }
 
 @end

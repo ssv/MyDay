@@ -25,4 +25,6 @@
 - (IBAction)activeFilterSwitched:(id)sender;
 - (void)showTask:(NSString *)managedObjectIdURIRepresentation;
 
+- (void)refresh;
+
 @end

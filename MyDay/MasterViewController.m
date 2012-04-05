@@ -55,6 +55,10 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [self refresh];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -65,6 +69,10 @@
 }
 
 #pragma mark - UI
+
+- (void)refresh {
+    [self fetchTasksForState:self.completed];
+}
 
 - (void)loadActiveInactiveSwitch {
     NSArray *items = [NSArray arrayWithObjects:

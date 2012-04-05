@@ -198,38 +198,36 @@
             break;
     }
     
-    long oldAlert = [[self.detailItem valueForKey:@"alert"] longValue];
+    // cancel previous LN for this task
+    NSString *uri = [[[self.detailItem objectID] URIRepresentation] absoluteString];
+    NSArray *allNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    NSArray *toCancel = [allNotifications filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        UILocalNotification *testedNotification = (UILocalNotification *)evaluatedObject;
+        return [[[testedNotification userInfo] valueForKey:@"taskId"] isEqual:uri];
+    }]];
+    for (UILocalNotification *notification in toCancel) {
+        [[UIApplication sharedApplication] cancelLocalNotification:notification];
+    }
 
-    // TODO date can be changed too!
-    // TODO #2 should we schedule completed task?
-    if (oldAlert != alert) {
+    // TODO should we schedule completed task or task in the past?
+
+    // schedule new LN
+    if (alert != ALERT_NO) {
+        UILocalNotification *notification = [UILocalNotification new];
+
+        notification.alertBody = titleText;
+        notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:compiledDate];
+
+        NSString *uri = [[[self.detailItem objectID] URIRepresentation] absoluteString];
+        notification.userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:uri, @"taskId", nil];
         
-        if (oldAlert != ALERT_NO) {
-            NSArray *allNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-            NSArray *toDiscard = [allNotifications filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-                UILocalNotification *testedNotification = (UILocalNotification *)evaluatedObject;
-                return [[[testedNotification userInfo] objectForKey:@"taskId"] isEqual:[self.detailItem objectID]];
-            }]];
-            for (UILocalNotification *notification in toDiscard) {
-                [[UIApplication sharedApplication] cancelLocalNotification:notification];
-            }
-        }
-
-        if (alert != ALERT_NO) {
-            UILocalNotification *notification = [UILocalNotification new];
-            notification.alertBody = titleText;
-            notification.alertAction = @"";
-            notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:compiledDate];
-            [notification.userInfo setValue:[self.detailItem objectID] forKey:@"taskId"];
-            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-        }
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
     
     [self.detailItem setValue:[NSNumber numberWithLong:alert] forKey:@"alert"];
 
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate saveContext];
-
 }
 
 #pragma mark - Date and time picker

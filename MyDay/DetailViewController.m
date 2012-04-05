@@ -215,6 +215,7 @@
     if (alert != ALERT_NO) {
         UILocalNotification *notification = [UILocalNotification new];
 
+        notification.soundName = UILocalNotificationDefaultSoundName;
         notification.alertBody = titleText;
         notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:compiledDate];
 

@@ -56,8 +56,27 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    // TODO refactor me please, I look really similar to code in MasterViewController :)
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"completed == FALSE && date < %@", [NSDate date]];
+    [fetchRequest setPredicate:predicate];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                                managedObjectContext:self.managedObjectContext
+                                                                                                  sectionNameKeyPath:nil
+                                                                                                           cacheName:nil];
+    
+	NSError *error = nil;
+    [aFetchedResultsController performFetch:&error];
+    NSInteger overdueCount = [[[aFetchedResultsController sections] objectAtIndex:0] numberOfObjects];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:overdueCount];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

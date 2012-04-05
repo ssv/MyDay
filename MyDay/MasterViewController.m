@@ -227,7 +227,6 @@
                                                                                                 managedObjectContext:self.managedObjectContext
                                                                                                   sectionNameKeyPath:sectionNameKeyPath
                                                                                                            cacheName:nil];
-    
     if (__fetchedResultsController != nil) {
         __fetchedResultsController.delegate = nil;
         self.fetchedResultsController = nil;
@@ -243,7 +242,6 @@
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
-    
 }
 
 - (NSFetchedResultsController *)fetchedResultsController

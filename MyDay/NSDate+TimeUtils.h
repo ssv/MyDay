@@ -10,6 +10,7 @@
 
 - (BOOL)isSameDayWithDate:(NSDate *)date;
 - (BOOL)isNextDayAfterDate:(NSDate *)date;
+- (BOOL)isBeforeDate:(NSDate *)date;
 
 - (NSString *)formatShort;
 - (NSString *)formatMiddle;

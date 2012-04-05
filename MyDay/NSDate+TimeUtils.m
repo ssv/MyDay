@@ -40,6 +40,10 @@
     return [self isSameDayWithDate:tomorrow];
 }
 
+- (BOOL)isBeforeDate:(NSDate *)date {
+    return [self compare:date] == NSOrderedAscending;
+}
+
 - (NSDate *)onlyTime {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     return [calendar dateFromComponents:[self timeComponents]];

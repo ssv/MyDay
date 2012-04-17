@@ -158,6 +158,11 @@
 #pragma mark - Editing content
 
 - (IBAction)cancel {
+    if ([[self.detailItem valueForKey:@"unsaved"] boolValue]) {
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        [appDelegate.managedObjectContext deleteObject:self.detailItem];
+        [appDelegate saveContext];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -167,6 +172,8 @@
 }
 
 - (void)save {
+    [self.detailItem setValue:[NSNumber numberWithBool:NO] forKey:@"unsaved"];
+    
     NSString *titleText = self.uiTitle.text;
     [self.detailItem setValue:titleText forKey:@"title"];
 

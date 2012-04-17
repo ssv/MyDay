@@ -122,11 +122,10 @@
     anHour.hour = 1;
     NSDate *preferredDate = [gregorian dateByAddingComponents:anHour toDate:creationDateNoMins options:0];
     [newManagedObject setValue:preferredDate forKey:@"date"];
-    
-    [newManagedObject setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
-    
-    [newManagedObject setValue:[NSNumber numberWithLong:-1] forKey:@"alert"];
 
+    [newManagedObject setValue:[NSNumber numberWithBool:YES] forKey:@"unsaved"];
+    [newManagedObject setValue:[NSNumber numberWithBool:NO] forKey:@"completed"];
+    [newManagedObject setValue:[NSNumber numberWithLong:-1] forKey:@"alert"];
     [newManagedObject setValue:@"" forKey:@"title"];
         
     // Save the context.

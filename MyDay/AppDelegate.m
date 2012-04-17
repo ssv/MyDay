@@ -35,63 +35,15 @@
         controller.managedObjectContext = self.managedObjectContext;
     }
     
-    UILocalNotification *launchInitiator = [launchOptions valueForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (launchInitiator != nil) {
-        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        id topController = navigationController.topViewController;
-        if ([topController isMemberOfClass:[MasterViewController class]]) {
-            MasterViewController *controller = (MasterViewController *)topController;
-            [controller showTaskForURI:[launchInitiator.userInfo valueForKey:@"taskId"]];
-        }
-    }
-    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+
     return YES;
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"MyDay!"
-                                                        message:notification.alertBody
-                                                       delegate:self
-                                              cancelButtonTitle:@"Dismiss"
-                                              otherButtonTitles:@"View", nil];
-    
-    NSString *taskId = [notification.userInfo valueForKey:@"taskId"];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:taskId forKey:@"taskId"];
-
-    [alertView show];
-}
-							
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [[UIApplication sharedApplication] cancelLocalNotification:notification];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // TODO refactor me please, I look really similar to code in MasterViewController :)
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setFetchBatchSize:20];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"completed == FALSE && date < %@", [NSDate date]];
-    [fetchRequest setPredicate:predicate];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                                                managedObjectContext:self.managedObjectContext
-                                                                                                  sectionNameKeyPath:nil
-                                                                                                           cacheName:nil];
-    
-	NSError *error = nil;
-    [aFetchedResultsController performFetch:&error];
-    NSInteger overdueCount = [[[aFetchedResultsController sections] objectAtIndex:0] numberOfObjects];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:overdueCount];
-}
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
@@ -103,10 +55,6 @@
     }
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
@@ -114,20 +62,6 @@
     [self saveContext];
 }
 
-#pragma mark - UIAlertView delegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex != 0) {
-        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        id topController = navigationController.topViewController;
-        if ([topController isMemberOfClass:[MasterViewController class]]) {
-            MasterViewController *controller = (MasterViewController *)topController;
-
-            NSString *taskId = [[NSUserDefaults standardUserDefaults] valueForKey:@"taskId"];
-            [controller showTaskForURI:taskId];
-        }
-    }
-}
 
 #pragma mark - Core Data stack
 
@@ -248,6 +182,7 @@
         notification.soundName = UILocalNotificationDefaultSoundName;
         notification.alertBody = [task valueForKey:@"title"];
         notification.fireDate = [NSDate dateWithTimeInterval:-(double)alert sinceDate:[task valueForKey:@"date"]];
+        notification.applicationIconBadgeNumber = 1;
         
         NSString *uri = [[[task objectID] URIRepresentation] absoluteString];
         notification.userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:uri, @"taskId", nil];

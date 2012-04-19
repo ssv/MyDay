@@ -35,8 +35,6 @@
         controller.managedObjectContext = self.managedObjectContext;
     }
     
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-
     return YES;
 }
 
@@ -53,6 +51,10 @@
     if ([topController isMemberOfClass:[MasterViewController class]]) {
         [(MasterViewController *)topController refresh];
     }
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 
